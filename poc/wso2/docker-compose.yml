@@ -1,0 +1,27 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  web:
+    build: .
+    container_name: wso2am-server
+    hostname: wso2am-server
+    restart: always
+    networks:
+      net_two:
+        ipv4_address: 10.2.0.2
+      net_one:
+        ipv4_address: 10.1.0.3
+#    volumes: 
+#      - /c/development/pessoal/pucminas/poc/wso2/repository/deployment/server/webapps/teste/:/home/wso2carbon/wso2am-4.0.0/repository/deployment/server/webapps/authenticationendpoint/:rw
+        
+networks: 
+  net_two:
+    name: net_two
+    enable_ipv6: false
+    driver: bridge 
+    ipam:
+      config:
+        - subnet: 10.2.0.0/16
+          gateway: 10.2.0.1
+  net_one:
+    external: true
+    name: net_one 

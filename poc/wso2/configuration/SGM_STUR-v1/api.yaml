@@ -1,0 +1,111 @@
+type: api
+version: v4.0.0
+data:
+  id: 7ae91267-2146-4ca6-8dc1-0be90297732f
+  name: SGM_STUR
+  context: /rest/stur
+  version: v1
+  provider: admin
+  lifeCycleStatus: CREATED
+  responseCachingEnabled: false
+  cacheTimeout: 300
+  hasThumbnail: false
+  isDefaultVersion: false
+  isRevision: false
+  revisionId: 0
+  enableSchemaValidation: false
+  type: HTTP
+  transport:
+   - http
+   - https
+  tags: []
+  policies:
+   - Unlimited
+  authorizationHeader: Authorization
+  securityScheme:
+   - oauth2
+   - oauth_basic_auth_api_key_mandatory
+  visibility: PUBLIC
+  visibleRoles: []
+  visibleTenants: []
+  mediationPolicies: []
+  subscriptionAvailability: CURRENT_TENANT
+  subscriptionAvailableTenants: []
+  additionalProperties: []
+  accessControl: NONE
+  accessControlRoles: []
+  businessInformation: {}
+  corsConfiguration:
+    corsConfigurationEnabled: false
+    accessControlAllowOrigins:
+     - '*'
+    accessControlAllowCredentials: false
+    accessControlAllowHeaders:
+     - authorization
+     - Access-Control-Allow-Origin
+     - Content-Type
+     - SOAPAction
+     - apikey
+     - Internal-Key
+    accessControlAllowMethods:
+     - GET
+     - PUT
+     - POST
+     - DELETE
+     - PATCH
+     - OPTIONS
+  websubSubscriptionConfiguration:
+    enable: false
+    secret: ""
+    signingAlgorithm: SHA1
+    signatureHeader: x-hub-signature
+  createdTime: 2021-10-01 02:46:43.926
+  lastUpdatedTime: 2021-10-01 02:47:55.974
+  endpointConfig:
+    endpoint_type: http
+    sandbox_endpoints:
+      url: http://stur-app:8080/stur/api
+    production_endpoints:
+      url: http://stur-app:8080/stur/api
+  endpointImplementationType: ENDPOINT
+  scopes: []
+  operations:
+   -
+    id: ""
+    target: /*
+    verb: GET
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+   -
+    id: ""
+    target: /*
+    verb: PUT
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+   -
+    id: ""
+    target: /*
+    verb: POST
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+   -
+    id: ""
+    target: /*
+    verb: DELETE
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+  categories: []
+  keyManagers:
+   - all
+  advertiseInfo:
+    advertised: false
+    apiOwner: admin
+    vendor: WSO2

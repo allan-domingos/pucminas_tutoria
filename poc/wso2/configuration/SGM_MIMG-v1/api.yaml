@@ -1,0 +1,111 @@
+type: api
+version: v4.0.0
+data:
+  id: fe5d31de-72c8-49cd-b3db-670a70bc5e96
+  name: SGM_MIMG
+  context: /rest/mimg
+  version: v1
+  provider: admin
+  lifeCycleStatus: PUBLISHED
+  responseCachingEnabled: false
+  cacheTimeout: 300
+  hasThumbnail: false
+  isDefaultVersion: false
+  isRevision: false
+  revisionId: 0
+  enableSchemaValidation: false
+  type: HTTP
+  transport:
+   - http
+   - https
+  tags: []
+  policies:
+   - Unlimited
+  authorizationHeader: Authorization
+  securityScheme:
+   - oauth2
+   - oauth_basic_auth_api_key_mandatory
+  visibility: PUBLIC
+  visibleRoles: []
+  visibleTenants: []
+  mediationPolicies: []
+  subscriptionAvailability: CURRENT_TENANT
+  subscriptionAvailableTenants: []
+  additionalProperties: []
+  accessControl: NONE
+  accessControlRoles: []
+  businessInformation: {}
+  corsConfiguration:
+    corsConfigurationEnabled: false
+    accessControlAllowOrigins:
+     - '*'
+    accessControlAllowCredentials: false
+    accessControlAllowHeaders:
+     - authorization
+     - Access-Control-Allow-Origin
+     - Content-Type
+     - SOAPAction
+     - apikey
+     - Internal-Key
+    accessControlAllowMethods:
+     - GET
+     - PUT
+     - POST
+     - DELETE
+     - PATCH
+     - OPTIONS
+  websubSubscriptionConfiguration:
+    enable: false
+    secret: ""
+    signingAlgorithm: SHA1
+    signatureHeader: x-hub-signature
+  createdTime: 2021-10-01 02:15:01.367
+  lastUpdatedTime: 2021-10-01 02:15:36.84
+  endpointConfig:
+    endpoint_type: http
+    sandbox_endpoints:
+      url: http://mimg-app:8080/mimg/api
+    production_endpoints:
+      url: http://mimg-app:8080/mimg/api
+  endpointImplementationType: ENDPOINT
+  scopes: []
+  operations:
+   -
+    id: ""
+    target: /*
+    verb: GET
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+   -
+    id: ""
+    target: /*
+    verb: PUT
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+   -
+    id: ""
+    target: /*
+    verb: POST
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+   -
+    id: ""
+    target: /*
+    verb: DELETE
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+  categories: []
+  keyManagers:
+   - all
+  advertiseInfo:
+    advertised: false
+    apiOwner: admin
+    vendor: WSO2

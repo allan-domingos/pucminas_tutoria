@@ -1,0 +1,18 @@
+version: "3.9"  # optional since v1.27.0
+services: 
+  web:
+    build: .
+    container_name: proxy-server
+    hostname: proxy-server
+    restart: always
+    networks:
+      net_two:
+        ipv4_address: 10.2.0.4
+    ports:  
+      - 80:80
+      - 443:443 
+      
+networks: 
+  net_two:
+    external: true
+    name: net_two

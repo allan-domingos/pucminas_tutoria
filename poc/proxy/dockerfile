@@ -1,0 +1,5 @@
+FROM nginx:1.21.1-alpine
+RUN mkdir -p /etc/nginx/ssl/
+ADD nginx/ssl /etc/nginx/ssl
+COPY nginx/conf.d/*.* /etc/nginx/conf.d/
+RUN mkdir -p /etc/nginx/log/bomdestino/https/

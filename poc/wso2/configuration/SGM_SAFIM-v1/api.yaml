@@ -1,0 +1,111 @@
+type: api
+version: v4.0.0
+data:
+  id: b44bec0a-0225-42da-a361-2669bf232587
+  name: SGM_SAFIM
+  context: /rest/safim
+  version: v1
+  provider: admin
+  lifeCycleStatus: PUBLISHED
+  responseCachingEnabled: false
+  cacheTimeout: 300
+  hasThumbnail: false
+  isDefaultVersion: false
+  isRevision: false
+  revisionId: 0
+  enableSchemaValidation: false
+  type: HTTP
+  transport:
+   - http
+   - https
+  tags: []
+  policies:
+   - Unlimited
+  authorizationHeader: Authorization
+  securityScheme:
+   - oauth2
+   - oauth_basic_auth_api_key_mandatory
+  visibility: PUBLIC
+  visibleRoles: []
+  visibleTenants: []
+  mediationPolicies: []
+  subscriptionAvailability: CURRENT_TENANT
+  subscriptionAvailableTenants: []
+  additionalProperties: []
+  accessControl: NONE
+  accessControlRoles: []
+  businessInformation: {}
+  corsConfiguration:
+    corsConfigurationEnabled: false
+    accessControlAllowOrigins:
+     - '*'
+    accessControlAllowCredentials: false
+    accessControlAllowHeaders:
+     - authorization
+     - Access-Control-Allow-Origin
+     - Content-Type
+     - SOAPAction
+     - apikey
+     - Internal-Key
+    accessControlAllowMethods:
+     - GET
+     - PUT
+     - POST
+     - DELETE
+     - PATCH
+     - OPTIONS
+  websubSubscriptionConfiguration:
+    enable: false
+    secret: ""
+    signingAlgorithm: SHA1
+    signatureHeader: x-hub-signature
+  createdTime: 2021-09-24 22:51:23.629
+  lastUpdatedTime: 2021-10-01 01:50:59.615
+  endpointConfig:
+    endpoint_type: http
+    sandbox_endpoints:
+      url: http://safim-app:8080/safim/api
+    production_endpoints:
+      url: http://safim-app:8080/safim/api
+  endpointImplementationType: ENDPOINT
+  scopes: []
+  operations:
+   -
+    id: ""
+    target: /*
+    verb: GET
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+   -
+    id: ""
+    target: /*
+    verb: PUT
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+   -
+    id: ""
+    target: /*
+    verb: POST
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+   -
+    id: ""
+    target: /*
+    verb: DELETE
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+  categories: []
+  keyManagers:
+   - all
+  advertiseInfo:
+    advertised: false
+    apiOwner: admin
+    vendor: WSO2

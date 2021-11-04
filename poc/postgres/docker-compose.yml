@@ -1,0 +1,26 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  db:
+    build: .
+    container_name: postgres-server
+    hostname: postgres-server
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    networks:
+      net_one:
+        ipv4_address: 10.1.0.2
+    volumes:
+      - /c/development/temp/docker/storange/postgres:/var/lib/postgresql/data:rw
+    ports:
+      - 5432:5432       
+      
+networks: 
+  net_one:
+    name: net_one
+    enable_ipv6: false
+    driver: bridge 
+    ipam:
+      config:
+        - subnet: 10.1.0.0/16
+          gateway: 10.1.0.1

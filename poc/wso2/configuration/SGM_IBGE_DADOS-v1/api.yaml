@@ -1,0 +1,87 @@
+type: api
+version: v4.0.0
+data:
+  id: 7b7f6740-0d2f-4643-8015-c27f4b7b01de
+  name: SGM_IBGE_DADOS
+  context: /rest/ibge/dados
+  version: v1
+  provider: admin
+  lifeCycleStatus: CREATED
+  responseCachingEnabled: false
+  cacheTimeout: 300
+  hasThumbnail: false
+  isDefaultVersion: false
+  isRevision: false
+  revisionId: 0
+  enableSchemaValidation: false
+  type: HTTP
+  transport:
+   - http
+   - https
+  tags: []
+  policies:
+   - Unlimited
+  authorizationHeader: Authorization
+  securityScheme:
+   - oauth2
+   - oauth_basic_auth_api_key_mandatory
+  visibility: PUBLIC
+  visibleRoles: []
+  visibleTenants: []
+  mediationPolicies: []
+  subscriptionAvailability: CURRENT_TENANT
+  subscriptionAvailableTenants: []
+  additionalProperties: []
+  accessControl: NONE
+  accessControlRoles: []
+  businessInformation: {}
+  corsConfiguration:
+    corsConfigurationEnabled: false
+    accessControlAllowOrigins:
+     - '*'
+    accessControlAllowCredentials: false
+    accessControlAllowHeaders:
+     - authorization
+     - Access-Control-Allow-Origin
+     - Content-Type
+     - SOAPAction
+     - apikey
+     - Internal-Key
+    accessControlAllowMethods:
+     - GET
+     - PUT
+     - POST
+     - DELETE
+     - PATCH
+     - OPTIONS
+  websubSubscriptionConfiguration:
+    enable: false
+    secret: ""
+    signingAlgorithm: SHA1
+    signatureHeader: x-hub-signature
+  createdTime: 2021-10-01 02:03:15.06
+  lastUpdatedTime: 2021-10-01 02:25:36.21
+  endpointConfig:
+    endpoint_type: http
+    sandbox_endpoints:
+      url: https://servicodados.ibge.gov.br/api/v1
+    production_endpoints:
+      url: https://servicodados.ibge.gov.br/api/v1
+  endpointImplementationType: ENDPOINT
+  scopes: []
+  operations:
+   -
+    id: ""
+    target: /*
+    verb: GET
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+  categories: []
+  keyManagers:
+   - all
+  advertiseInfo:
+    advertised: false
+    apiOwner: admin
+    vendor: WSO2

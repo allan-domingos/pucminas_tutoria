@@ -1,0 +1,87 @@
+type: api
+version: v4.0.0
+data:
+  id: 92671fe8-acb5-47ec-898e-071e7c7c75a4
+  name: SGM_INPE_GEO
+  context: /rest/inpe/geo
+  version: v1
+  provider: admin
+  lifeCycleStatus: PUBLISHED
+  responseCachingEnabled: false
+  cacheTimeout: 300
+  hasThumbnail: false
+  isDefaultVersion: false
+  isRevision: false
+  revisionId: 0
+  enableSchemaValidation: false
+  type: HTTP
+  transport:
+   - http
+   - https
+  tags: []
+  policies:
+   - Unlimited
+  authorizationHeader: Authorization
+  securityScheme:
+   - oauth2
+   - oauth_basic_auth_api_key_mandatory
+  visibility: PUBLIC
+  visibleRoles: []
+  visibleTenants: []
+  mediationPolicies: []
+  subscriptionAvailability: CURRENT_TENANT
+  subscriptionAvailableTenants: []
+  additionalProperties: []
+  accessControl: NONE
+  accessControlRoles: []
+  businessInformation: {}
+  corsConfiguration:
+    corsConfigurationEnabled: false
+    accessControlAllowOrigins:
+     - '*'
+    accessControlAllowCredentials: false
+    accessControlAllowHeaders:
+     - authorization
+     - Access-Control-Allow-Origin
+     - Content-Type
+     - SOAPAction
+     - apikey
+     - Internal-Key
+    accessControlAllowMethods:
+     - GET
+     - PUT
+     - POST
+     - DELETE
+     - PATCH
+     - OPTIONS
+  websubSubscriptionConfiguration:
+    enable: false
+    secret: ""
+    signingAlgorithm: SHA1
+    signatureHeader: x-hub-signature
+  createdTime: 2021-10-03 01:48:49.119
+  lastUpdatedTime: 2021-10-03 01:50:37.926
+  endpointConfig:
+    endpoint_type: http
+    sandbox_endpoints:
+      url: http://terrabrasilis.dpi.inpe.br/geoserver
+    production_endpoints:
+      url: http://terrabrasilis.dpi.inpe.br/geoserver
+  endpointImplementationType: ENDPOINT
+  scopes: []
+  operations:
+   -
+    id: ""
+    target: /*
+    verb: GET
+    authType: Application & Application User
+    throttlingPolicy: Unlimited
+    scopes: []
+    usedProductIds: []
+  categories: []
+  keyManagers:
+   - all
+  advertiseInfo:
+    advertised: false
+    apiOwner: admin
+    vendor: WSO2

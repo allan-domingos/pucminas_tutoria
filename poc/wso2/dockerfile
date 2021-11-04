@@ -1,0 +1,14 @@
+
+FROM wso2/wso2am:4.0.0
+
+# driver jdbc postgres.
+COPY lib/*.* wso2am-4.0.0/lib/
+
+# configuration, used for load balance and proxy
+COPY repository/conf/*.* wso2am-4.0.0/repository/conf/
+
+# certificate, used for load balance and proxy 
+COPY repository/resources/security/*.jks wso2am-4.0.0/repository/resources/security/
+
+# custom login screen.
+#COPY repository/deployment/server/webapps/authenticationendpoint/ wso2am-4.0.0/repository/deployment/server/webapps/authenticationendpoint/
