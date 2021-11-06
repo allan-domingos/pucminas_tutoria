@@ -1,9 +1,9 @@
 package br.com.mineradora.dto;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Set;
 
-import br.com.mineradora.entity.Solicitacao;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,10 +25,10 @@ public class InsumoDTO implements Serializable {
 	
 	private String nome;
 	
-	private String cnpj;
+	private String descricao;
 	
-	private String uf;
+	private LocalDate dataInclusao;
 	
-	private Set<Solicitacao> solicitacoes;
+	private Set<SolicitacaoDTO> solicitacoes;
 	
 }

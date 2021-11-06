@@ -1,5 +1,7 @@
 package br.com.mineradora.service;
 
+import java.util.List;
+
 import br.com.mineradora.dto.SolicitacaoDTO;
 
 /**
@@ -9,6 +11,12 @@ import br.com.mineradora.dto.SolicitacaoDTO;
  */
 public interface SolicitacaoService {
 
-	public SolicitacaoDTO findById(Long id); 
-	
+	List<SolicitacaoDTO> findAll();
+
+	SolicitacaoDTO findById(final Long id);
+
+	void save(SolicitacaoDTO dto);
+
+	void update(SolicitacaoDTO dto);
+
 }

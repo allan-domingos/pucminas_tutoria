@@ -11,6 +11,12 @@ import br.com.mineradora.dto.InsumoDTO;
  */
 public interface InsumoService {
 
-	public List<InsumoDTO> findAll(); 
+	List<InsumoDTO> findAll(); 
+	
+	InsumoDTO findById(final Long id);
+	
+	void save(InsumoDTO dto);
+	
+	void update(InsumoDTO dto); 
 	
 }
