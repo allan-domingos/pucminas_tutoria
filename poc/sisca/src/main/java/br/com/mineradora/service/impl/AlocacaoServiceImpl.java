@@ -1,5 +1,6 @@
 package br.com.mineradora.service.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +49,7 @@ public class AlocacaoServiceImpl implements AlocacaoService {
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS , isolation = Isolation.READ_COMMITTED, readOnly = true)
-	public AlocacaoDTO findById(final Long id) {
+	public AlocacaoDTO findById(final BigInteger id) {
 		Alocacao alocacao = this.alocacaoRepository.findById(id);
 		return AlocacaoServiceImpl.entityToDto(alocacao);
 	}

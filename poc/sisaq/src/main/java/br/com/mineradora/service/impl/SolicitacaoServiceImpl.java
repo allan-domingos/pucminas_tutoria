@@ -1,5 +1,6 @@
 package br.com.mineradora.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,9 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
 		dto.setId(solicitacao.getId());
 		dto.setDataInclusao(solicitacao.getDataInclusao());
 		dto.setQuantidade(solicitacao.getQuantidade());
+		dto.setDescricao(solicitacao.getDescricao());
+		dto.setNome(solicitacao.getNome());
+		dto.setIdAtivo(solicitacao.getIdAtivo());
 		return dto;
 	}
 	
@@ -38,6 +42,9 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
 		entity.setId(dto.getId());
 		entity.setQuantidade(dto.getQuantidade());
 		entity.setDataInclusao(dto.getDataInclusao());
+		entity.setDescricao(dto.getDescricao());
+		entity.setNome(dto.getNome());
+		entity.setIdAtivo(dto.getIdAtivo());
 		return entity;
 	}
 
@@ -56,15 +63,20 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void save(SolicitacaoDTO dto) {
 		Solicitacao solicitacao = SolicitacaoServiceImpl.dtoToEntity(dto);
+		solicitacao.setDataInclusao(LocalDateTime.now());
 		this.solicitacaoRepository.save(solicitacao);
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(SolicitacaoDTO dto) {
 		Solicitacao solicitacao = this.solicitacaoRepository.findById(dto.getId());
 		solicitacao.setQuantidade(dto.getQuantidade());
+		solicitacao.setNome(dto.getNome());
+		solicitacao.setDescricao(dto.getDescricao());
 		this.solicitacaoRepository.update(solicitacao);
 	}
 

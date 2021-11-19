@@ -1,8 +1,8 @@
 package br.com.mineradora.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -44,13 +43,19 @@ public class Aquisicao implements Serializable {
 	@Column(name = "QTD")
 	private Long quantidade;
 	
+	@Column(name = "CNPJ")
+	private String cnpj;
+	
+	@Column(name = "NOTA_FISCAL")
+	private String notaFiscal;
+	
+	@Column(name = "VALOR")
+	private BigDecimal valor;
+	
 	@Column(name = "DATA_INCLUSAO")
-	private LocalDate dataInclusao;
+	private LocalDateTime dataInclusao;
 		
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, targetEntity = Solicitacao.class)
 	private Solicitacao solicitacao;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH , mappedBy = "municipio", targetEntity = Alocacao.class )
-	private Set<Alocacao> alocacoes;
-
 }

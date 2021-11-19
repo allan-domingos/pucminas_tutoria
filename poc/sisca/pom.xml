@@ -4,13 +4,13 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.mineradora</groupId>
-	<artifactId>sisaq</artifactId>
+	<artifactId>sisca</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>sisaq</name>
+	<name>sisca</name>
 
-	<description>Sistema de Aquisição</description>
+	<description>Sistema de Cadastro de Ativos</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,15 +40,21 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.2.23</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-spatial</artifactId>
+			<version>5.5.3.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.postgis</groupId>
+			<artifactId>postgis-jdbc</artifactId>
+			<version>2.5.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.18</version>
+			<version>1.18.20</version>
 			<scope>provided</scope>
 		</dependency>
 

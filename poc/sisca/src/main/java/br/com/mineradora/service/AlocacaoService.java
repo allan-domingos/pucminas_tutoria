@@ -1,5 +1,6 @@
 package br.com.mineradora.service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import br.com.mineradora.dto.AlocacaoDTO;
@@ -13,7 +14,7 @@ public interface AlocacaoService {
 
 	List<AlocacaoDTO> findAll();
 
-	AlocacaoDTO findById(final Long id);
+	AlocacaoDTO findById(final BigInteger id);
 
 	void save(AlocacaoDTO dto);
 

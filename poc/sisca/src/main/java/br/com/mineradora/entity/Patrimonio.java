@@ -1,7 +1,8 @@
 package br.com.mineradora.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.math.BigInteger;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,13 +21,13 @@ import lombok.Setter;
 /**
  * 
  * @author Allan - allan.domingos@live.com
- * @since 10 de abr. de 2021
+ * @since 07 de nov. de 2021
  */
 @Setter
 @Getter
 @Entity
-@Table(name = "Alocacao")
-public class Alocacao implements Serializable {
+@Table(name = "PATRIMONIO")
+public class Patrimonio implements Serializable {
 
 	/**
 	 * 
@@ -34,15 +35,18 @@ public class Alocacao implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ALOCACAO_SEQ")
-    @SequenceGenerator(sequenceName = "ALOCACAO_SEQ", allocationSize = 1, name = "ALOCACAO_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PATRIMONIO_SEQ")
+    @SequenceGenerator(sequenceName = "PATRIMONIO_SEQ", allocationSize = 1, name = "PATRIMONIO_SEQ")
 	@Column(name = "ID")
-	private Long id;
+	private BigInteger id;
 	
 	@Column(name = "DATA_INCLUSAO")
-	private LocalDate dataInclusao;
+	private LocalDateTime dataInclusao;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, targetEntity = Aquisicao.class)
-	private Aquisicao aquisicao;
-
+	@Column(name = "NUMERO")
+	private String numero;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, targetEntity = Ativo.class)
+	private Ativo ativo;
+	
 }

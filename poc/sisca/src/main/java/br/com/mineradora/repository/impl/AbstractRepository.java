@@ -1,6 +1,7 @@
 package br.com.mineradora.repository.impl;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -25,14 +26,14 @@ public class AbstractRepository<T extends Serializable> {
 	}
 
 	public void update(T t) {
-		this.em.merge(t);
+		this.em.refresh(t);
 	}
 
 	public void delete(T t) {
 		this.em.remove(t);
 	}
 
-	public T findById(Class<T> t, Long id) {
+	public T findById(Class<T> t, BigInteger id) {
 		return this.em.find(t, id);
 	}
 

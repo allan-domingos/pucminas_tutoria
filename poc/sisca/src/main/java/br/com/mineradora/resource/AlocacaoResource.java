@@ -1,5 +1,7 @@
 package br.com.mineradora.resource;
 
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ import br.com.mineradora.service.AlocacaoService;
  * @since 03 de nov. de 2021
  */
 @RestController
-@RequestMapping("api/solicitacao")
+@RequestMapping("api/alocacao")
 public class AlocacaoResource {
 	
 	@Autowired
@@ -30,7 +32,7 @@ public class AlocacaoResource {
     }
 	
 	@RequestMapping(value = "{id}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> findById(@PathVariable("id") final Long id) {
+    public ResponseEntity<?> findById(@PathVariable("id") final BigInteger id) {
         return ResponseEntity.ok(this.alocacaoService.findById(id));
     }
 	

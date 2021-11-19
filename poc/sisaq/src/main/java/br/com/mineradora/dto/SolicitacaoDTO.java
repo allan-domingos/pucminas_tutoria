@@ -1,7 +1,7 @@
 package br.com.mineradora.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import lombok.Getter;
@@ -25,9 +25,13 @@ public class SolicitacaoDTO implements Serializable {
 	
 	private Long quantidade;
 	
-	private LocalDate dataInclusao;
+	private String nome;
 	
-	private InsumoDTO insumo;
+	private String descricao;
+	
+	private LocalDateTime dataInclusao;
+	
+	private Long idAtivo;
 	
 	private Set<AquisicaoDTO> aquisicoes;
 

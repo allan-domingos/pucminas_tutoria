@@ -1,5 +1,6 @@
 package br.com.mineradora.service.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,10 +10,10 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.mineradora.dto.InsumoDTO;
-import br.com.mineradora.entity.Insumo;
-import br.com.mineradora.repository.InsumoRepository;
-import br.com.mineradora.service.InsumoService;
+import br.com.mineradora.dto.AtivoDTO;
+import br.com.mineradora.entity.Ativo;
+import br.com.mineradora.repository.AtivoRepository;
+import br.com.mineradora.service.AtivoService;
 
 /**
  * 
@@ -20,13 +21,13 @@ import br.com.mineradora.service.InsumoService;
  * @since 03 de nov. de 2021
  */
 @Service
-public class InsumoServiceImpl implements InsumoService {
+public class AtivoServiceImpl implements AtivoService {
 
 	@Autowired
-	private InsumoRepository insumoRepository;
+	private AtivoRepository insumoRepository;
 	
-	public static InsumoDTO entityToDto(Insumo insumo) {
-		InsumoDTO dto = new InsumoDTO();
+	public static AtivoDTO entityToDto(Ativo insumo) {
+		AtivoDTO dto = new AtivoDTO();
 		dto.setId(insumo.getId());
 		dto.setDescricao(insumo.getDescricao());
 		dto.setDataInclusao(insumo.getDataInclusao());
@@ -34,8 +35,8 @@ public class InsumoServiceImpl implements InsumoService {
 		return dto;
 	}
 	
-	public static Insumo dtoToEntity(InsumoDTO dto) {
-		Insumo entity = new Insumo();
+	public static Ativo dtoToEntity(AtivoDTO dto) {
+		Ativo entity = new Ativo();
 		entity.setId(dto.getId());
 		entity.setDescricao(dto.getDescricao());
 		entity.setDataInclusao(dto.getDataInclusao());
@@ -45,29 +46,29 @@ public class InsumoServiceImpl implements InsumoService {
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS , isolation = Isolation.READ_COMMITTED, readOnly = true)
-	public List<InsumoDTO> findAll() {
-		List<Insumo> insumos = this.insumoRepository.findAll();
-		return insumos.stream().map((insumo) -> InsumoServiceImpl.entityToDto(insumo)).collect(Collectors.toList());	
+	public List<AtivoDTO> findAll() {
+		List<Ativo> insumos = this.insumoRepository.findAll();
+		return insumos.stream().map((insumo) -> AtivoServiceImpl.entityToDto(insumo)).collect(Collectors.toList());	
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS , isolation = Isolation.READ_COMMITTED, readOnly = true)
-	public InsumoDTO findById(final Long id) {
-		Insumo insumo = this.insumoRepository.findById(id);
-		return InsumoServiceImpl.entityToDto(insumo);
+	public AtivoDTO findById(final BigInteger id) {
+		Ativo insumo = this.insumoRepository.findById(id);
+		return AtivoServiceImpl.entityToDto(insumo);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void save(InsumoDTO dto) {
-		Insumo insumo = InsumoServiceImpl.dtoToEntity(dto);
+	public void save(AtivoDTO dto) {
+		Ativo insumo = AtivoServiceImpl.dtoToEntity(dto);
 		this.insumoRepository.save(insumo);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void update(InsumoDTO dto) {
-		Insumo insumo = this.insumoRepository.findById(dto.getId());
+	public void update(AtivoDTO dto) {
+		Ativo insumo = this.insumoRepository.findById(dto.getId());
 		insumo.setDescricao(dto.getDescricao());
 		insumo.setNome(dto.getNome());
 		this.insumoRepository.update(insumo);

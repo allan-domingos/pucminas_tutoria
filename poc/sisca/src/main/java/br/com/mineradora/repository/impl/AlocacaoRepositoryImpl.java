@@ -1,5 +1,6 @@
 package br.com.mineradora.repository.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,7 @@ public class AlocacaoRepositoryImpl extends AbstractRepository<Alocacao> impleme
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public Alocacao findById(Long id) {
+	public Alocacao findById(BigInteger id) {
 		return findById(Alocacao.class, id);
 	}
 

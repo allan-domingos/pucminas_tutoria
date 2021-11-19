@@ -1,6 +1,6 @@
 package br.com.mineradora.repository;
 
-import br.com.mineradora.entity.Insumo;
+import br.com.mineradora.entity.Ativo;
 
 /**
  * 
@@ -8,6 +8,6 @@ import br.com.mineradora.entity.Insumo;
  * @since 03 de nov. de 2021
  * @param <T>
  */
-public interface InsumoRepository extends Repository<Insumo> {
+public interface AtivoRepository extends Repository<Ativo> {
 	
 }

@@ -1,8 +1,8 @@
 package br.com.mineradora.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Set;
+import java.math.BigInteger;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,21 +14,19 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class InsumoDTO implements Serializable {
+public class AtivoDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private BigInteger id;
 	
 	private String nome;
 	
 	private String descricao;
 	
-	private LocalDate dataInclusao;
-	
-	private Set<SolicitacaoDTO> solicitacoes;
+	private LocalDateTime dataInclusao;
 	
 }
