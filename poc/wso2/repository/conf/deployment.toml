@@ -2,7 +2,7 @@
 # https://apim.docs.wso2.com/en/latest/install-and-setup/setup/setting-up-proxy-server-and-the-load-balancer/configuring-the-proxy-server-and-the-load-balancer/#step-3-configure-the-load-balancerreverse-proxy-settings-in-the-product
 
 [server]
-hostname = "bomdestino.gov.br"
+hostname = "allandomingos.ddns.net"
 node_ip = "10.1.0.3"
 mode = "single"
 #offset=0
@@ -35,35 +35,14 @@ driver = "org.postgresql.Driver"
 [truststore]
 type= "JKS"
 file_name = "wso2am-server-truststore.jks"
-password= "bomdestino"
+password= "carbon"
 
 [keystore.tls]
 file_name =  "wso2am-server-keystore.jks"
 type =  "JKS"
-password =  "bomdestino"
+password =  "carbon"
 alias =  "wso2am-server"
-key_password =  "bomdestino"
-
-#[keystore.tls]
-#file_name =  "wso2carbon.jks"
-#type =  "JKS"
-#password =  "wso2carbon"
-#alias =  "wso2carbon"
-#key_password =  "wso2carbon"
-
-#[keystore.primary]
-#file_name =  "bomdestino-keystore.jks"
-#type =  "JKS"
-#password =  "bomdestino"
-#alias =  "bomdestino.gov.br"
-#key_password =  "bomdestino"
-
-#[keystore.internal]
-#file_name =  "bomdestino-keystore.jks"
-#type =  "JKS"
-#password =  "bomdestino"
-#alias =  "bomdestino.gov.br"
-#key_password =  "bomdestino"
+key_password =  "carbon"
 
 [[apim.gateway.environment]]
 name = "Default"
@@ -128,10 +107,10 @@ auth_token = ""
 #key_validation_handler_impl = "org.wso2.carbon.apimgt.keymgt.handlers.DefaultKeyValidationHandler"
 
 [apim.idp]
-server_url = "https://bomdestino.gov.br"
-authorize_endpoint = "https://bomdestino.gov.br/oauth2/authorize"
-oidc_logout_endpoint = "https://bomdestino.gov.br/oidc/logout"
-oidc_check_session_endpoint = "https://bomdestino.gov.br/oidc/checksession"
+server_url = "https://allandomingos.ddns.net"
+authorize_endpoint = "https://allandomingos.ddns.net/oauth2/authorize"
+oidc_logout_endpoint = "https://allandomingos.ddns.net/oidc/logout"
+oidc_check_session_endpoint = "https://allandomingos.ddns.net/oidc/checksession"
 #authorize_endpoint = "https://localhost:${mgt.transport.https.port}/oauth2/authorize"
 #server_url = "https://localhost:${mgt.transport.https.port}"
 #oidc_logout_endpoint = "https://localhost:${mgt.transport.https.port}/oidc/logout"
@@ -156,7 +135,7 @@ oidc_check_session_endpoint = "https://bomdestino.gov.br/oidc/checksession"
 #enable_token_hashing = false
 
 [apim.devportal]
-url = "https://bomdestino.gov.br/devportal"
+url = "https://allandomingos.ddns.net/devportal"
 #url = "https://localhost:${mgt.transport.https.port}/devportal"
 #enable_application_sharing = false
 #if application_sharing_type, application_sharing_impl both defined priority goes to application_sharing_impl
@@ -283,4 +262,4 @@ enable = true
 
 [transport.https.properties]
 proxyPort = 443
-proxyHost = "bomdestino.gov.br"
+proxyHost = "allandomingos.ddns.net"

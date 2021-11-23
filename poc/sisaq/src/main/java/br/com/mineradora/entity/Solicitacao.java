@@ -1,6 +1,7 @@
 package br.com.mineradora.entity;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -38,7 +39,7 @@ public class Solicitacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SOLICITACAO_SEQ")
     @SequenceGenerator(sequenceName = "SOLICITACAO_SEQ", allocationSize = 1, name = "SOLICITACAO_SEQ")
 	@Column(name = "ID")
-	private Long id;
+	private BigInteger id;
 	
 	@Column(name = "QTD")
 	private Long quantidade;

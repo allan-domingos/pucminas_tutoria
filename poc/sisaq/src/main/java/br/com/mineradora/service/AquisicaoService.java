@@ -1,5 +1,6 @@
 package br.com.mineradora.service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import br.com.mineradora.dto.AquisicaoDTO;
@@ -13,7 +14,7 @@ public interface AquisicaoService {
 
 	List<AquisicaoDTO> findAll();
 
-	AquisicaoDTO findById(final Long id);
+	AquisicaoDTO findById(final BigInteger id);
 
 	void save(AquisicaoDTO dto);
 

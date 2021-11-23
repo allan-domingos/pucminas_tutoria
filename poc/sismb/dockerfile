@@ -1,0 +1,17 @@
+# image maven for package application.
+FROM maven:3.6.3-jdk-8-slim AS mvn_build
+COPY src /usr/src/app/src  
+COPY pom.xml /usr/src/app  
+RUN --mount=type=cache,target=/root/.m2   mvn -f /usr/src/app/pom.xml clean package
+
+FROM openjdk:8-slim
+
+RUN mkdir -p /opt/app
+RUN mkdir -p /opt/data
+
+# add app to deployment.
+COPY --from=mvn_build /usr/src/app/target/stur.war /opt/app
+ 
+WORKDIR /opt/app
+
+ENTRYPOINT ["java","-jar","stur.war"]

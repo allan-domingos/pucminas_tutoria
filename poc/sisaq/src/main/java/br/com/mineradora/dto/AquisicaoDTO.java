@@ -2,6 +2,7 @@ package br.com.mineradora.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class AquisicaoDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private BigInteger id;
 	
 	private Long quantidade;
 	

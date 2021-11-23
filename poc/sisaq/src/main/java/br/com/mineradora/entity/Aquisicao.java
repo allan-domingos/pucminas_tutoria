@@ -2,6 +2,7 @@ package br.com.mineradora.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -38,7 +39,7 @@ public class Aquisicao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AQUISICAO_SEQ")
     @SequenceGenerator(sequenceName = "AQUISICAO_SEQ", allocationSize = 1, name = "AQUISICAO_SEQ")
 	@Column(name = "ID")
-	private Long id;
+	private BigInteger id;
 	
 	@Column(name = "QTD")
 	private Long quantidade;

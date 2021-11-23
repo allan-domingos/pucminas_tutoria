@@ -1,5 +1,6 @@
 package br.com.mineradora.service.impl;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,7 +70,7 @@ public class AquisicaoServiceImpl implements AquisicaoService {
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
-	public AquisicaoDTO findById(final Long id) {
+	public AquisicaoDTO findById(final BigInteger id) {
 		Aquisicao aquisicao = this.aquisicaoRepository.findById(id);
 		SolicitacaoDTO so = SolicitacaoServiceImpl.entityToDto(aquisicao.getSolicitacao());
 		AquisicaoDTO aq = AquisicaoServiceImpl.entityToDto(aquisicao);

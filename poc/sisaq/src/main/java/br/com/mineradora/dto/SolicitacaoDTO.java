@@ -1,6 +1,7 @@
 package br.com.mineradora.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class SolicitacaoDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private BigInteger id;
 	
 	private Long quantidade;
 	

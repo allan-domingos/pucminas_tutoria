@@ -1,5 +1,6 @@
 package br.com.mineradora.service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import br.com.mineradora.dto.SolicitacaoDTO;
@@ -13,7 +14,7 @@ public interface SolicitacaoService {
 
 	List<SolicitacaoDTO> findAll();
 
-	SolicitacaoDTO findById(final Long id);
+	SolicitacaoDTO findById(final BigInteger id);
 
 	void save(SolicitacaoDTO dto);
 

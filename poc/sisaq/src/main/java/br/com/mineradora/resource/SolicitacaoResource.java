@@ -1,5 +1,7 @@
 package br.com.mineradora.resource;
 
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +32,7 @@ public class SolicitacaoResource {
     }
 	
 	@RequestMapping(value = "{id}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> findById(@PathVariable("id") final Long id) {
+    public ResponseEntity<?> findById(@PathVariable("id") final BigInteger id) {
         return ResponseEntity.ok(this.solicitacaoService.findById(id));
     }
 	

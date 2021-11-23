@@ -26,7 +26,7 @@ public class AbstractRepository<T extends Serializable> {
 	}
 
 	public void update(T t) {
-		this.em.refresh(t);
+		this.em.merge(t);
 	}
 
 	public void delete(T t) {
