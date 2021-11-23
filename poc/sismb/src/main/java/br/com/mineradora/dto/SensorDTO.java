@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 
-import br.com.mineradora.entity.Barragem;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +22,6 @@ public class SensorDTO implements Serializable {
 
 	private LocalDateTime dataInclusao;
 
-	private Barragem barragem;
+	private BarragemDTO barragem;
 
 }

@@ -3,6 +3,8 @@ package br.com.mineradora.repository.impl;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import br.com.mineradora.entity.Vazao;
 import br.com.mineradora.repository.VazaoRepository;
 
@@ -12,6 +14,7 @@ import br.com.mineradora.repository.VazaoRepository;
  * @since Nov 21, 2021
  *
  */
+@Repository
 public class VazaoRepositoryImpl extends AbstractRepository<Vazao> implements VazaoRepository {
 
 	/**

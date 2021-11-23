@@ -3,6 +3,8 @@ package br.com.mineradora.repository.impl;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import br.com.mineradora.entity.Piezometro;
 import br.com.mineradora.repository.PiezometroRepository;
 
@@ -12,6 +14,7 @@ import br.com.mineradora.repository.PiezometroRepository;
  * @since Nov 21, 2021
  *
  */
+@Repository
 public class PiezometroRepositoryImpl extends AbstractRepository<Piezometro> implements PiezometroRepository {
 
 	/**

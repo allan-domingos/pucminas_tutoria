@@ -3,6 +3,8 @@ package br.com.mineradora.repository.impl;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import br.com.mineradora.entity.Inclinometro;
 import br.com.mineradora.repository.InclinometroRepository;
 
@@ -12,6 +14,7 @@ import br.com.mineradora.repository.InclinometroRepository;
  * @since Nov 21, 2021
  *
  */
+@Repository
 public class InclinometroRepositoryImpl extends AbstractRepository<Inclinometro> implements InclinometroRepository {
 
 	/**
