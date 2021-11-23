@@ -24,7 +24,7 @@ public class SolicitacaoDTO implements Serializable {
 	
 	private BigInteger id;
 	
-	private Long quantidade;
+	private BigInteger quantidade;
 	
 	private String nome;
 	
@@ -32,7 +32,7 @@ public class SolicitacaoDTO implements Serializable {
 	
 	private LocalDateTime dataInclusao;
 	
-	private Long idAtivo;
+	private BigInteger idAtivo;
 	
 	private Set<AquisicaoDTO> aquisicoes;
 

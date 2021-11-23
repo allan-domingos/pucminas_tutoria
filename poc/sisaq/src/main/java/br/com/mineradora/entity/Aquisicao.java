@@ -42,7 +42,7 @@ public class Aquisicao implements Serializable {
 	private BigInteger id;
 	
 	@Column(name = "QTD")
-	private Long quantidade;
+	private BigInteger quantidade;
 	
 	@Column(name = "CNPJ")
 	private String cnpj;

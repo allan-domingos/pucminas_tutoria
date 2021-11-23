@@ -24,7 +24,7 @@ public class AquisicaoDTO implements Serializable {
 	
 	private BigInteger id;
 	
-	private Long quantidade;
+	private BigInteger quantidade;
 	
 	private LocalDateTime dataInclusao;
 	

@@ -42,7 +42,7 @@ public class Solicitacao implements Serializable {
 	private BigInteger id;
 	
 	@Column(name = "QTD")
-	private Long quantidade;
+	private BigInteger quantidade;
 	
 	@Column(name = "NOME")
 	private String nome;
@@ -54,7 +54,7 @@ public class Solicitacao implements Serializable {
 	private LocalDateTime dataInclusao;
 	
 	@Column(name = "ATIVO_ID")
-	private Long idAtivo;
+	private BigInteger idAtivo;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH , mappedBy = "solicitacao", targetEntity = Aquisicao.class )
 	private Set<Aquisicao> aquisicoes;
