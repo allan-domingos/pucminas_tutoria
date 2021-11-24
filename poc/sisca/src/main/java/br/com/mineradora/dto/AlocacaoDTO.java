@@ -25,4 +25,12 @@ public class AlocacaoDTO implements Serializable {
 	
 	private LocalDateTime dataInclusao;
 	
+	private PatrimonioDTO patrimonio;
+	
+	private AtivoDTO ativo;
+	
+	private LocalDTO local;
+	
+	private BigInteger idAquisicao;
+	
 }

@@ -52,4 +52,7 @@ public class Alocacao implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, targetEntity = Patrimonio.class)
 	private Patrimonio patrimonio;
 	
+	@Column(name = "AQUISICAO_ID")
+	private BigInteger idAquisicao;
+	
 }

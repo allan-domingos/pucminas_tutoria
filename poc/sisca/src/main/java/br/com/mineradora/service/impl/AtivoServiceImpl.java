@@ -1,6 +1,7 @@
 package br.com.mineradora.service.impl;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,17 +22,18 @@ import br.com.mineradora.service.AtivoService;
  * @since 03 de nov. de 2021
  */
 @Service
-public class AtivoServiceImpl implements AtivoService {
+public class AtivoServiceImpl extends AbstractService implements AtivoService {
 
 	@Autowired
-	private AtivoRepository insumoRepository;
+	private AtivoRepository ativoRepository;
 	
-	public static AtivoDTO entityToDto(Ativo insumo) {
+	public static AtivoDTO entityToDto(Ativo entity) {
 		AtivoDTO dto = new AtivoDTO();
-		dto.setId(insumo.getId());
-		dto.setDescricao(insumo.getDescricao());
-		dto.setDataInclusao(insumo.getDataInclusao());
-		dto.setNome(insumo.getNome());
+		dto.setId(entity.getId());
+		dto.setDescricao(entity.getDescricao());
+		dto.setDataInclusao(entity.getDataInclusao());
+		dto.setNome(entity.getNome());
+		dto.setDuravel(entity.getDuravel());
 		return dto;
 	}
 	
@@ -41,37 +43,40 @@ public class AtivoServiceImpl implements AtivoService {
 		entity.setDescricao(dto.getDescricao());
 		entity.setDataInclusao(dto.getDataInclusao());
 		entity.setNome(dto.getNome());
+		entity.setDuravel(dto.getDuravel());
 		return entity;
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS , isolation = Isolation.READ_COMMITTED, readOnly = true)
 	public List<AtivoDTO> findAll() {
-		List<Ativo> insumos = this.insumoRepository.findAll();
-		return insumos.stream().map((insumo) -> AtivoServiceImpl.entityToDto(insumo)).collect(Collectors.toList());	
+		List<Ativo> insumos = this.ativoRepository.findAll();
+		return insumos.stream().map( ativo -> AtivoServiceImpl.entityToDto(ativo)).collect(Collectors.toList());	
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS , isolation = Isolation.READ_COMMITTED, readOnly = true)
 	public AtivoDTO findById(final BigInteger id) {
-		Ativo insumo = this.insumoRepository.findById(id);
-		return AtivoServiceImpl.entityToDto(insumo);
+		Ativo ativo = this.ativoRepository.findById(id);
+		return AtivoServiceImpl.entityToDto(ativo);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void save(AtivoDTO dto) {
-		Ativo insumo = AtivoServiceImpl.dtoToEntity(dto);
-		this.insumoRepository.save(insumo);
+		Ativo ativo = AtivoServiceImpl.dtoToEntity(dto);
+		ativo.setDataInclusao(LocalDateTime.now());
+		this.ativoRepository.save(ativo);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(AtivoDTO dto) {
-		Ativo insumo = this.insumoRepository.findById(dto.getId());
-		insumo.setDescricao(dto.getDescricao());
-		insumo.setNome(dto.getNome());
-		this.insumoRepository.update(insumo);
+		Ativo ativo = this.ativoRepository.findById(dto.getId());
+		ativo.setDescricao(dto.getDescricao());
+		ativo.setNome(dto.getNome());
+		ativo.setDuravel(dto.getDuravel());
+		this.ativoRepository.update(ativo);
 	}
 
 }

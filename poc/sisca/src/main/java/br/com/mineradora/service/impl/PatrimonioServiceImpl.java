@@ -1,6 +1,7 @@
 package br.com.mineradora.service.impl;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.mineradora.dto.PatrimonioDTO;
+import br.com.mineradora.entity.Ativo;
 import br.com.mineradora.entity.Patrimonio;
+import br.com.mineradora.repository.AtivoRepository;
 import br.com.mineradora.repository.PatrimonioRepository;
 import br.com.mineradora.service.PatrimonioService;
 
@@ -21,11 +24,14 @@ import br.com.mineradora.service.PatrimonioService;
  * @since 07 de nov. de 2021
  */
 @Service
-public class PatrimonioServiceImpl implements PatrimonioService {
+public class PatrimonioServiceImpl extends AbstractService implements PatrimonioService {
 
 	@Autowired
 	private PatrimonioRepository patrimonioRepository;
-	
+
+	@Autowired
+	private AtivoRepository ativoRepository;
+
 	public static PatrimonioDTO entityToDto(Patrimonio patrimonio) {
 		PatrimonioDTO dto = new PatrimonioDTO();
 		dto.setId(patrimonio.getId());
@@ -33,7 +39,7 @@ public class PatrimonioServiceImpl implements PatrimonioService {
 		dto.setDataInclusao(patrimonio.getDataInclusao());
 		return dto;
 	}
-	
+
 	public static Patrimonio dtoToEntity(PatrimonioDTO dto) {
 		Patrimonio entity = new Patrimonio();
 		entity.setId(dto.getId());
@@ -43,23 +49,32 @@ public class PatrimonioServiceImpl implements PatrimonioService {
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.SUPPORTS , isolation = Isolation.READ_COMMITTED, readOnly = true)
+	@Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
 	public List<PatrimonioDTO> findAll() {
 		List<Patrimonio> patrimonios = this.patrimonioRepository.findAll();
-		return patrimonios.stream().map((insumo) -> PatrimonioServiceImpl.entityToDto(insumo)).collect(Collectors.toList());	
+		return patrimonios.stream().map(patrimonio -> {
+			PatrimonioDTO dto = PatrimonioServiceImpl.entityToDto(patrimonio);
+			dto.setAtivo(AtivoServiceImpl.entityToDto(patrimonio.getAtivo()));
+			return dto;
+		}).collect(Collectors.toList());
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.SUPPORTS , isolation = Isolation.READ_COMMITTED, readOnly = true)
+	@Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
 	public PatrimonioDTO findById(final BigInteger id) {
 		Patrimonio patrimonio = this.patrimonioRepository.findById(id);
-		return PatrimonioServiceImpl.entityToDto(patrimonio);
+		PatrimonioDTO dto = PatrimonioServiceImpl.entityToDto(patrimonio);
+		dto.setAtivo(AtivoServiceImpl.entityToDto(patrimonio.getAtivo()));
+		return dto;
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void save(PatrimonioDTO dto) {
+		Ativo ativo = this.ativoRepository.findById(dto.getAtivo().getId());
 		Patrimonio patrimonio = PatrimonioServiceImpl.dtoToEntity(dto);
+		patrimonio.setDataInclusao(LocalDateTime.now());
+		patrimonio.setAtivo(ativo);
 		this.patrimonioRepository.save(patrimonio);
 	}
 

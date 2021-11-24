@@ -26,5 +26,9 @@ public class LocalDTO implements Serializable {
 	private LocalDateTime dataInclusao;
 	
 	private String nome;
+	
+	private String endereco;
+	
+	private Double[] coordenadas;
 		
 }

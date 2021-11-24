@@ -27,6 +27,8 @@ public class AtivoDTO implements Serializable {
 	
 	private String descricao;
 	
+	private Boolean duravel;
+	
 	private LocalDateTime dataInclusao;
 	
 }
