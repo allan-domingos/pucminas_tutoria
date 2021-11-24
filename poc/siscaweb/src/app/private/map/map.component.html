@@ -1,0 +1,161 @@
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col">
+
+            <div class="card border-dark shadow-lg mt-5">
+
+                <div class="card-body">
+
+                    <div id="fullscreen" class="row">
+
+                        <div class="col">
+
+                            <div class="w-100" id="map"></div>
+
+                        </div>
+
+                        <div class="col-2">
+
+                            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+                                <label class="btn btn-secondary active" (click)="satelite()">
+                                    <input type="radio" name="options" id="satelite" checked> Satélite
+                                </label>
+                                <label class="btn btn-secondary" (click)="mapa()">
+                                    <input type="radio" name="options" id="mapa"> Mapa
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="coordenacao">Coordenação:</label>
+                                <select id="coordenacao" class="custom-select custom-select-sm mb-1"
+                                    [compareWith]="compare" (ngModelChange)="changeCoordenacao($event)"
+                                    [ngModel]="coordenacao">
+                                    <option [ngValue]="undefined">Selecione</option>
+                                    <option *ngFor="let coord of coordenacoes" [ngValue]="coord">
+                                        {{coord.sigla}} - {{coord.nome}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="camada">Camadas:</label>
+                                <div id="camada" class="list-group overflow-auto border border-dark px-1 bg-white"
+                                    style="height: 440px;">
+                                    <button *ngFor="let cam of camadas" type="button" [ngClass]="estaAtivo(cam)"
+                                        class="btn btn-sm btn-outline-dark btn-layer my-1"
+                                        (click)="ativarEDesativar(cam)" aria-pressed="false">
+                                        <em class="bi bi-eye-fill float-left"></em>
+                                        <em class="bi bi-eye-slash-fill float-left"></em> {{cam.nome}}
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+            <div class="accordion" id="accordionTerreno">
+                <div class="card border-dark shadow-lg mt-4" *ngIf="terreno">
+
+                    <div class="card-header" id="cardHeaderTerreno">
+
+                        <div class="d-flex">
+                            <div class="flex-grow-1">
+                                <strong class="py-1">Terreno:</strong>
+                            </div>
+                            <div class="flex-row">
+                                <button type="button" class="btn btn-sm btn-outline-dark" aria-expanded="true"
+                                    data-toggle="collapse" data-target="#cardTerreno" aria-controls="cardTerreno">
+                                    <em class="bi bi-plus"></em>
+                                    <em class="bi bi-dash"></em>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cardTerreno" class="collapse show" aria-labelledby="cardHeaderTerreno"
+                        data-parent="#accordionTerreno">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div>
+                                            <label><strong>Matricula:</strong>&nbsp;</label>
+                                            <span>{{terreno.matricula}}</span>
+                                        </div>
+                                        <div>
+                                            <label><strong>Conprimento:</strong>&nbsp;</label>
+                                            <span>{{terreno.comprimento}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div>
+                                            <label><strong>Data Inclusão:</strong>&nbsp;</label>
+                                            <span>{{terreno.dataInclusao | date : 'dd/MM/yyyy'}}</span>
+                                        </div>
+                                        <div>
+                                            <label><strong>Largura:</strong>&nbsp;</label>
+                                            <span>{{terreno.largura}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div>
+                                            <label><strong>Coordenadas:</strong>&nbsp;</label>
+                                            <span>{{terreno?.coordenadas}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-sm btn-dark" (click)="salvarCoordenada(terreno)" ><em class="bi bi-save" ></em>&nbsp;Salvar</button>
+                            <button type="button" class="btn btn-sm btn-dark ml-2" (click)="limparCoordenada(terreno)" [disabled]="!terreno.coordenadas" ><em class="bi bi-bounding-box-circles" ></em>&nbsp;Limpar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-dark shadow-lg mt-2">
+
+                <div class="card-header">
+                    <strong>Terrenos:</strong>
+                </div>
+
+                <div class="card-body px-1 py-2">
+
+                    <div class="d-flex flex-wrap">
+
+                        <div *ngFor="let ter of terrenos; index as i">
+                            <button [ngClass]="isTerrenoSelecinado(ter)" type="button"
+                                class="btn btn-sm btn-outline-dark rounded-pill py-1 px-2 mx-1"
+                                (click)="selecionarTerreno(ter)">
+                                {{ter.matricula}}
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

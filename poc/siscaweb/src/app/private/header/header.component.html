@@ -1,0 +1,33 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" [routerLink]="['/home']">
+        <svg class="bi" width="30" height="30">
+            <use xlink:href="bootstrap-icons.svg#bootstrap-fill" />
+        </svg>
+        Sistema de Cadastro de Ativos
+    </a>
+    <div class="d-flex">
+        <div class="dropdown">
+            <div class="btn text-white" data-toggle="dropdown">
+                <svg class="bi" width="30" height="30">
+                    <use xlink:href="bootstrap-icons.svg#person-circle" />
+                </svg>
+            </div>
+            <div class="dropdown-menu dropdown-menu-right">
+                <span class="dropdown-header text-center pb-0">{{name}}</span>
+                <span class="dropdown-header text-center pt-0">{{email}}</span>
+                <a class="dropdown-item" [routerLink]="['/map']" >
+                    <i class="bi bi-map-fill"></i>
+                    <small class="font-weight-bold"> Mapa</small>
+                </a>
+                <a class="dropdown-item" [routerLink]="['/profile']">
+                    <i class="bi bi-file-person"></i>
+                    <small class="font-weight-bold"> Usuário</small>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item cursor-pointer" (click)="logout()">
+                    <small class="font-weight-bold">Sair</small>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

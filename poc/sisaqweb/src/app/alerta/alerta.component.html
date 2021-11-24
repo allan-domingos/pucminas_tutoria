@@ -1,0 +1,13 @@
+<div class="d-flex-fluid position-absolute w-100" >
+    <div class="d-flex flex-row justify-content-center">
+        <div class="alert {{alerta?.type}} dsm-alerta" role="alert"  [@alerta]="hasAlerta() ? 'visible' : 'hidden'">
+            <div *ngIf="alerta?.erros">
+                <div *ngFor="let err of alerta?.erros" >
+                    <span  class="bi {{alerta?.icon}}"> {{err.message}}</span><br>  
+                </div>
+            </div>
+            <span *ngIf="!alerta?.erros" class="bi {{alerta?.icon}}"> {{alerta?.message}}</span>  
+        </div>
+    </div>
+</div>
+

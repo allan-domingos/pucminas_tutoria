@@ -1,0 +1,11 @@
+#FROM node:14.17.6-slim AS npm_build
+#WORKDIR /usr/src/app
+#COPY . .
+#RUN npm install
+#RUN npm run build -- --configuration=production --base-href /siscaweb/
+
+FROM httpd:2.4
+RUN mkdir -p  /usr/local/apache2/htdocs/siscaweb/
+#COPY --from=npm_build /usr/src/app/dist/siscaweb/ /usr/local/apache2/htdocs/siscaweb/
+COPY apache/.htaccess /usr/local/apache2/htdocs/siscaweb/
+COPY apache/httpd.conf /usr/local/apache2/conf/

@@ -1,0 +1,13 @@
+.engrenagem {
+  -webkit-transform-origin: 50% 43%;
+  transform-origin: 50% 43%;
+  -webkit-animation: engrenagem 4s linear infinite;
+  animation: engrenagem 4s linear infinite;
+}
+
+@keyframes engrenagem {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

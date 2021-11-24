@@ -1,0 +1,19 @@
+version: "3.9"  # optional since v1.27.0
+services: 
+  web:
+    build: .
+    container_name: sismbweb-app
+    hostname: sismbweb-app
+    restart: always
+    networks:
+      net_two:
+        ipv4_address: 10.2.0.7 
+    volumes: 
+      - /c/development/pessoal/pucminas_tutoria/poc/sismbweb/dist/sismbweb:/usr/local/apache2/htdocs/sismbweb/:rw
+#    ports:  
+#      - 80:80
+  
+networks: 
+  net_two:
+    external: true
+    name: net_two

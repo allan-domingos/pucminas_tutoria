@@ -1,0 +1,7 @@
+{
+    "terminal.integrated.shell.windows": "C:\\development\\git\\PortableGit-2.33.0.2-64-bit\\bin\\bash.exe",
+
+    //by security this property is valid only in user settings.
+    //"git.path": "C:\\development\\git\\PortableGit-2.30.1-64-bit\\mingw64\\bin\\git.exe",
+
+}

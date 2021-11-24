@@ -1,0 +1,19 @@
+version: "3.9"  # optional since v1.27.0
+services: 
+  web:
+    build: .
+    container_name: siscaweb-app
+    hostname: siscaweb-app
+    restart: always
+    networks:
+      net_two:
+        ipv4_address: 10.2.0.5 
+    volumes: 
+      - /c/development/pessoal/pucminas_tutoria/poc/siscaweb/dist/siscaweb:/usr/local/apache2/htdocs/siscaweb/:rw
+#    ports:  
+#      - 80:80
+  
+networks: 
+  net_two:
+    external: true
+    name: net_two
