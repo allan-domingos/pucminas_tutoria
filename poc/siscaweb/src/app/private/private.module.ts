@@ -14,6 +14,9 @@ import { MapComponent } from './map/map.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CpfPipe } from './pipe/cpf.pipe';
 
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
+
 @NgModule({
   declarations: [
     PrivateComponent, 
@@ -28,8 +31,9 @@ import { CpfPipe } from './pipe/cpf.pipe';
     CommonModule,
     FormsModule,
     RouterModule.forChild(ROUTES),
+    ToastModule
   ],
-  providers: [ConfirmService]
+  providers: [ConfirmService,MessageService]
 })
 
 export class PrivateModule { }

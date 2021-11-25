@@ -8,6 +8,7 @@ export const ROUTES: Routes = [
     {path: '', component: PrivateComponent, children: [
         {path: 'home', component: HomeComponent },
         {path: 'map', component: MapComponent},
-        {path: 'profile', component: ProfileComponent}
+        {path: 'profile', component: ProfileComponent},
+        {path: 'ativo', loadChildren : ()=> import('./ativo/ativo.module').then(m => m.AtivoModule)}
     ]}
 ];
