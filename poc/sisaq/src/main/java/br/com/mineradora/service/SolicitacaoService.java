@@ -20,4 +20,6 @@ public interface SolicitacaoService {
 
 	void update(SolicitacaoDTO dto);
 
+	List<SolicitacaoDTO> findAllByAtivoId(final BigInteger id);
+	
 }

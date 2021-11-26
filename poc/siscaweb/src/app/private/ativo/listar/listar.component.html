@@ -12,16 +12,18 @@
 
                 <div class="card-body">
 
-                    <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button p-button-secondary mb-2" (click)="cadastrar()"></button>
+                    <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button p-button-secondary mb-2"
+                        pTooltip="Novo Ativo" tooltipPosition="top" (click)="cadastrar()"></button>
 
-                    <p-table [value]="ativos"  [paginator]="true" [rows]="10" styleClass="p-datatable-striped p-datatable-responsive-demo" >
+                    <p-table [value]="ativos" [paginator]="true" [rows]="5"
+                        styleClass="p-datatable-striped p-datatable-responsive-demo">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th scope="col" >Nome</th>
-                                <th scope="col" >Descrição</th>
-                                <th scope="col" >Durável</th>
-                                <th scope="col" >Data Inclusão</th>
-                                <th scope="col" >Ações</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Durável</th>
+                                <th scope="col">Data Inclusão</th>
+                                <th scope="col">Ações</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-ativo>
@@ -31,8 +33,24 @@
                                 <td>{{ativo.duravel ? 'Sim' : 'Não'}}</td>
                                 <td>{{ativo.dataInclusao | date: 'dd/MM/yyyy HH:mm'}}</td>
                                 <td>
-                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-secondary mr-2" (click)="editar(ativo)" ></button>
-                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-secondary mr-2" (click)="remover(ativo)" ></button>
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Editar Ativo"
+                                        tooltipPosition="top" (click)="editar(ativo)"></button>
+                                    <button pButton pRipple icon="pi pi-trash"
+                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Remover Ativo"
+                                        tooltipPosition="top" (click)="remover(ativo)"></button>
+                                    <button pButton pRipple icon="pi pi-send"
+                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Solicitar Aquisição"
+                                        tooltipPosition="top" (click)="cadastraSolicitacao(ativo)">
+                                    </button>
+                                    <button pButton pRipple icon="pi pi-eye"
+                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Ver Solicitações"
+                                        tooltipPosition="top" (click)="verSolicitacao(ativo)">
+                                    </button>
+                                    <button pButton pRipple icon="pi pi-map-marker"
+                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Localizar Ativo"
+                                        tooltipPosition="top">
+                                    </button>
                                 </td>
                             </tr>
                         </ng-template>
@@ -48,19 +66,93 @@
 
 </div>
 
-<p-dialog [(visible)]="dialogOpen" [style]="{width: '450px'}" header="{{ativo?.id ? 'Editar' : 'Cadastrar'}} Ativo" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
+<form [formGroup]="formAtivo" (ngSubmit)="onSubmitAtivo()">
+    <p-dialog [(visible)]="dialogAtivoOpen" [style]="{width: '450px'}"
+        header="{{ativo?.id ? 'Editar' : 'Cadastrar'}} Ativo" [modal]="true" styleClass="p-fluid"
+        [closeOnEscape]="false" [closable]="false">
+        <ng-template pTemplate="content">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" formControlName="nome">
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <input type="text" class="form-control" id="descricao" formControlName="descricao">
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="duravel" formControlName="duravel">
+                <label class="custom-control-label" for="duravel">Durável</label>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button type="button" pButton pRipple label="Cancelar" icon="pi pi-times"
+                class="p-button p-button-secondary" (click)="hideDialogAtivo()"></button>
+            <button type="submit" pButton pRipple label="Salvar" icon="pi pi-check"
+                class="p-button p-button-secondary"></button>
+        </ng-template>
+    </p-dialog>
+</form>
 
+<form [formGroup]="formSolicitacao" (ngSubmit)="onSubmitSolicitacao()">
+    <p-dialog [(visible)]="dialogSolicitacaoOpen" [style]="{width: '450px'}" header="Solicitar aquisição de ativo"
+        [modal]="true" styleClass="p-fluid" [closeOnEscape]="false" [closable]="false">
+        <ng-template pTemplate="content">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" formControlName="nome" readonly>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <input type="text" class="form-control" id="descricao" formControlName="descricao" readonly>
+            </div>
+            <div class="form-group">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" class="form-control" id="quantidade" formControlName="quantidade">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button type="button" pButton pRipple label="Cancelar" icon="pi pi-times"
+                class="p-button p-button-secondary" (click)="hideDialogSolicitacao()"></button>
+            <button type="submit" pButton pRipple label="Solicitar" icon="pi pi-check"
+                class="p-button p-button-secondary"></button>
+        </ng-template>
+    </p-dialog>
+</form>
+
+<p-dialog [(visible)]="dialogSolicitacoesOpen" [style]="{width: '800px'}" header="Histórico de Solicitações" [modal]="true" styleClass="p-fluid"
+    [closeOnEscape]="false" [closable]="false">
+    <ng-template pTemplate="content">
+        <p-table [value]="solicitacoes" [paginator]="true" [rows]="3"
+            styleClass="p-datatable-striped p-datatable-responsive-demo">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Data Inclusão</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-solicitacao>
+                <tr>
+                    <td>{{solicitacao.nome}}</td>
+                    <td>{{solicitacao.descricao}}</td>
+                    <td>{{solicitacao.quantidade}}</td>
+                    <td>{{solicitacao.dataInclusao | date: 'dd/MM/yyyy HH:mm'}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
     </ng-template>
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button p-button-secondary" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Salvar" icon="pi pi-check" class="p-button p-button-secondary" (click)="salvar()"></button>
+        <button type="button" pButton pRipple label="Fechar" icon="pi pi-times" class="p-button p-button-secondary"
+            (click)="hideDialogSolicitacoes()"></button>
     </ng-template>
 </p-dialog>
 
 <p-confirmDialog #cd [style]="{width: '450px'}">
     <ng-template pTemplate="footer">
-        <button type="button" pButton icon="pi pi-times" class="p-button p-button-secondary"  label="Não" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="pi pi-check" class="p-button p-button-secondary"  label="Sim" (click)="cd.accept()"></button>
+        <button type="button" pButton icon="pi pi-times" class="p-button p-button-secondary" label="Não"
+            (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" class="p-button p-button-secondary" label="Sim"
+            (click)="cd.accept()"></button>
     </ng-template>
 </p-confirmDialog>

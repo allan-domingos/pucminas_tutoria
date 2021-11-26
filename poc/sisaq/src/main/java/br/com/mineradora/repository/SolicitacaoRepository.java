@@ -1,5 +1,8 @@
 package br.com.mineradora.repository;
 
+import java.math.BigInteger;
+import java.util.List;
+
 import br.com.mineradora.entity.Solicitacao;
 
 /**
@@ -9,5 +12,7 @@ import br.com.mineradora.entity.Solicitacao;
  * @param <T>
  */
 public interface SolicitacaoRepository extends Repository<Solicitacao> {
+	
+	public List<Solicitacao> findAllByAtivoId(final BigInteger id);
 	
 }

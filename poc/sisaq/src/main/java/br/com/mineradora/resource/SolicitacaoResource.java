@@ -48,4 +48,9 @@ public class SolicitacaoResource {
         return ResponseEntity.ok().build();
     } 
 	
+	@RequestMapping(value = "ativo/{id}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findAllByAtivoId(@PathVariable("id") final BigInteger id) {
+        return ResponseEntity.ok(this.solicitacaoService.findAllByAtivoId(id));
+    }
+	
 }

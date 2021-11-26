@@ -10,8 +10,8 @@ RUN mkdir -p /opt/app
 RUN mkdir -p /opt/data
 
 # add app to deployment.
-COPY --from=mvn_build /usr/src/app/target/stur.war /opt/app
+COPY --from=mvn_build /usr/src/app/target/sisca.war /opt/app
  
 WORKDIR /opt/app
 
-ENTRYPOINT ["java","-jar","stur.war"]
+ENTRYPOINT ["java","-jar","sisca.war"]

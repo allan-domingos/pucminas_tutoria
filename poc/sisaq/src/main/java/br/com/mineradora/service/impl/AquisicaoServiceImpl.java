@@ -34,6 +34,10 @@ public class AquisicaoServiceImpl implements AquisicaoService {
 	private SolicitacaoRepository solicitacaoRepository;
 
 	public static AquisicaoDTO entityToDto(Aquisicao aquisicao) {
+		
+		if(aquisicao == null)
+			return null;
+		
 		AquisicaoDTO dto = new AquisicaoDTO();
 		dto.setId(aquisicao.getId());
 		dto.setDataInclusao(aquisicao.getDataInclusao());
@@ -45,6 +49,10 @@ public class AquisicaoServiceImpl implements AquisicaoService {
 	}
 
 	public static Aquisicao dtoToEntity(AquisicaoDTO dto) {
+		
+		if(dto == null)
+			return null;
+		
 		Aquisicao entity = new Aquisicao();
 		entity.setId(dto.getId());
 		entity.setDataInclusao(dto.getDataInclusao());
@@ -97,6 +105,19 @@ public class AquisicaoServiceImpl implements AquisicaoService {
 		aquisicao.setValor(dto.getValor());
 		aquisicao.setCnpj(dto.getCnpj());
 		this.aquisicaoRepository.update(aquisicao);
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
+	public List<AquisicaoDTO> findAllByAtivoId(BigInteger id) {
+		List<Aquisicao> aquisicoes = this.aquisicaoRepository.findAllByAtivoId(id);
+
+		return aquisicoes.stream().map((aquisicao) -> {
+			SolicitacaoDTO so = SolicitacaoServiceImpl.entityToDto(aquisicao.getSolicitacao());
+			AquisicaoDTO aq = AquisicaoServiceImpl.entityToDto(aquisicao);
+			aq.setSolicitacao(so);
+			return aq;
+		}).collect(Collectors.toList());
 	}
 
 }

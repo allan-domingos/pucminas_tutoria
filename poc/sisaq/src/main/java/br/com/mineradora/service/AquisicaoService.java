@@ -20,4 +20,6 @@ public interface AquisicaoService {
 
 	void update(AquisicaoDTO dto);
 	
+	List<AquisicaoDTO> findAllByAtivoId(final BigInteger id);
+	
 }

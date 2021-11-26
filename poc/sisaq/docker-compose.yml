@@ -7,11 +7,9 @@ services:
     restart: always
     networks:
       net_one:
-        ipv4_address: 10.1.0.5
-#    volumes:
-#      - /c/development/temp/docker/storange/stur:/opt/data:rw
-   ports:
-     - 8080:8080
+        ipv4_address: 10.1.0.4
+#   ports:
+#     - 8080:8080
 networks: 
   net_one: 
     external: true

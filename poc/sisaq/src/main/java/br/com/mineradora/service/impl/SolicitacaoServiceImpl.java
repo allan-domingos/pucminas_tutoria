@@ -28,6 +28,10 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
 	private SolicitacaoRepository solicitacaoRepository;
 	
 	public static SolicitacaoDTO entityToDto(Solicitacao solicitacao) {
+		
+		if(solicitacao == null ) 
+			return null;
+		
 		SolicitacaoDTO dto = new SolicitacaoDTO();
 		dto.setId(solicitacao.getId());
 		dto.setDataInclusao(solicitacao.getDataInclusao());
@@ -39,6 +43,10 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
 	}
 	
 	public static Solicitacao dtoToEntity(SolicitacaoDTO dto) {
+		
+		if(dto == null)
+			return null;
+		
 		Solicitacao entity = new Solicitacao();
 		entity.setId(dto.getId());
 		entity.setQuantidade(dto.getQuantidade());
@@ -79,6 +87,13 @@ public class SolicitacaoServiceImpl implements SolicitacaoService {
 		solicitacao.setNome(dto.getNome());
 		solicitacao.setDescricao(dto.getDescricao());
 		this.solicitacaoRepository.update(solicitacao);
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
+	public List<SolicitacaoDTO> findAllByAtivoId(final BigInteger id){
+		List<Solicitacao> solicitacoes = this.solicitacaoRepository.findAllByAtivoId(id);
+		return solicitacoes.stream().map((solicitacao) -> SolicitacaoServiceImpl.entityToDto(solicitacao)).collect(Collectors.toList());	
 	}
 
 }

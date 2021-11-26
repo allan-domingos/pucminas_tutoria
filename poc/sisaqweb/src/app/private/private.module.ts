@@ -10,9 +10,8 @@ import { ROUTES } from './private.routes';
 import { HeaderComponent } from './header/header.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { ConfirmService } from './confirm/confirm.service';
-import { MapComponent } from './map/map.component';
-import { ProfileComponent } from './profile/profile.component';
 import { CpfPipe } from './pipe/cpf.pipe';
+
 
 @NgModule({
   declarations: [
@@ -20,14 +19,13 @@ import { CpfPipe } from './pipe/cpf.pipe';
     HomeComponent, 
     HeaderComponent,
     ConfirmComponent,
-    MapComponent,
-    ProfileComponent, 
     CpfPipe
   ],
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild(ROUTES),
+    RouterModule.forChild(ROUTES)
+    
   ],
   providers: [ConfirmService]
 })

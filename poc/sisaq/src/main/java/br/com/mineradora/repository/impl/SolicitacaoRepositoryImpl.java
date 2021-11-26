@@ -3,6 +3,8 @@ package br.com.mineradora.repository.impl;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.mineradora.entity.Solicitacao;
@@ -30,5 +32,13 @@ public class SolicitacaoRepositoryImpl extends AbstractRepository<Solicitacao> i
 	public List<Solicitacao> findAll() {
 		return findAll(Solicitacao.class);
 	}
-	
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> findAllByAtivoId(final BigInteger id) {
+		Query query = this.em.createQuery("SELECT so FROM Solicitacao so WHERE so.idAtivo = :id ");
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
+
 }
