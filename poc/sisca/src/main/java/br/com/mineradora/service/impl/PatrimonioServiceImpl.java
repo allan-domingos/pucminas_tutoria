@@ -85,5 +85,16 @@ public class PatrimonioServiceImpl extends AbstractService implements Patrimonio
 		patrimonio.setNumero(dto.getNumero());
 		this.patrimonioRepository.update(patrimonio);
 	}
+	
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
+	public List<PatrimonioDTO> findAllByAtivoId(final BigInteger id) {
+		List<Patrimonio> patrimonios = this.patrimonioRepository.findAllByAtivoId(id);
+		return patrimonios.stream().map(patrimonio -> {
+			PatrimonioDTO dto = PatrimonioServiceImpl.entityToDto(patrimonio);
+			dto.setAtivo(AtivoServiceImpl.entityToDto(patrimonio.getAtivo()));
+			return dto;
+		}).collect(Collectors.toList());
+	}
 
 }

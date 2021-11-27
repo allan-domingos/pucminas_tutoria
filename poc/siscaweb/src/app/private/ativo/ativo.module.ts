@@ -6,15 +6,18 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ROUTES } from './aitvo.routes';
 
-import {TableModule} from 'primeng/table';
-import {ButtonModule} from 'primeng/button';
-import {DialogModule} from 'primeng/dialog';
-import {TooltipModule} from 'primeng/tooltip';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
+import { PatrimonioComponent } from './patrimonio/patrimonio.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
     ListarComponent,
-    AtivoComponent
+    AtivoComponent,
+    PatrimonioComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +26,8 @@ import {TooltipModule} from 'primeng/tooltip';
     TableModule,
     ButtonModule,
     DialogModule,
-    TooltipModule
+    TooltipModule,
+    DropdownModule
   ]
 })
 export class AtivoModule { }

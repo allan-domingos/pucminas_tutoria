@@ -15,10 +15,11 @@
                     <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button p-button-secondary mb-2"
                         pTooltip="Novo Ativo" tooltipPosition="top" (click)="cadastrar()"></button>
 
-                    <p-table [value]="ativos" [paginator]="true" [rows]="5"
+                    <p-table [value]="ativos" [paginator]="true" [rows]="5" dataKey="id" (onRowExpand)="onRowExpand($event)"
                         styleClass="p-datatable-striped p-datatable-responsive-demo">
                         <ng-template pTemplate="header">
                             <tr>
+                                <th scope="col" style="width: 3rem"></th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Descrição</th>
                                 <th scope="col">Durável</th>
@@ -28,6 +29,11 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-ativo>
                             <tr>
+                                <td>
+                                    <button type="button" pButton pRipple [pRowToggler]="ativo"
+                                        class="p-button-text p-button-rounded p-button-plain"
+                                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                                </td>
                                 <td>{{ativo.nome}}</td>
                                 <td>{{ativo.descricao}}</td>
                                 <td>{{ativo.duravel ? 'Sim' : 'Não'}}</td>
@@ -47,11 +53,52 @@
                                         class="p-button-rounded p-button-secondary mr-2" pTooltip="Ver Solicitações"
                                         tooltipPosition="top" (click)="verSolicitacao(ativo)">
                                     </button>
-                                    <button pButton pRipple icon="pi pi-map-marker"
-                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Localizar Ativo"
-                                        tooltipPosition="top">
-                                    </button>
                                 </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="rowexpansion" let-ativo>
+                            <tr>
+                                <td colspan="6">
+                                    <p-table [value]="ativo.aquisicoes" dataKey="id" [paginator]="true" [rows]="3"
+                                        styleClass="p-datatable-striped p-datatable-responsive-demo">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th scope="col">CNPJ</th>
+                                                <th scope="col">Nota Fiscal</th>
+                                                <th scope="col">Quantidade</th>
+                                                <th scope="col">Valor</th>
+                                                <th scope="col">Data Inclusão</th>
+                                                <th scope="col">Ações</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-aquisicao>
+                                            <tr>
+                                                <td>{{aquisicao.cnpj}}</td>
+                                                <td>{{aquisicao.notaFiscal}}</td>
+                                                <td>{{aquisicao.quantidade}}</td>
+                                                <td>{{aquisicao.valor}}</td>
+                                                <td>{{aquisicao.dataInclusao | date: 'dd/MM/yyyy HH:mm'}}</td>
+                                                <td>
+                                                    <button pButton pRipple icon="bi bi-geo-alt" [routerLink]="['/ativo/patrimonio',aquisicao.id]"
+                                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Cadastra Patrimonio"
+                                                        tooltipPosition="top">
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="emptymessage">
+                                            <tr>
+                                                <td colspan="6">Não há aquisições</td>
+                                            </tr>
+                                        </ng-template>
+                                     </p-table>
+                                </td>
+                            </tr>
+
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="6">Não há ativos</td>
                             </tr>
                         </ng-template>
                     </p-table>

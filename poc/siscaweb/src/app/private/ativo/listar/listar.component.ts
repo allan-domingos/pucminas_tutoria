@@ -93,9 +93,9 @@ export class ListarComponent implements OnInit {
     this.dialogAtivoOpen = false;
 
     if (this.ativo) {
-        this.ativo.nome = this.formAtivo.controls.nome.value;
-        this.ativo.descricao = this.formAtivo.controls.descricao.value;
-        this.ativo.duravel = this.formAtivo.controls.duravel.value;
+      this.ativo.nome = this.formAtivo.controls.nome.value;
+      this.ativo.descricao = this.formAtivo.controls.descricao.value;
+      this.ativo.duravel = this.formAtivo.controls.duravel.value;
       this.ativoService.atualizar(this.ativo)
         .subscribe(
           () => {
@@ -166,9 +166,9 @@ export class ListarComponent implements OnInit {
     this.dialogSolicitacoesOpen = true;
     this.ativoService.solicitacoes(ativo.id)
       .subscribe(
-        (solicitacoes) => { 
+        (solicitacoes) => {
           console.log(solicitacoes)
-          this.solicitacoes = solicitacoes; 
+          this.solicitacoes = solicitacoes;
           this.dialogSolicitacoesOpen = true;
         },
         () => this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: `Erro ao listar solicitações!` }),
@@ -189,6 +189,21 @@ export class ListarComponent implements OnInit {
     this.dialogSolicitacoesOpen = false;
     this.solicitacoes = undefined;
     this.ativo = undefined;
+  }
+
+  public onRowExpand(event: any): void {
+    let ativo: Ativo = event.data;
+    this.ativoService.aquisicoes(ativo.id)
+      .pipe(
+        tap((aquisicoes) => {
+          ativo.aquisicoes = aquisicoes
+        }),
+        catchError((error) => {
+          this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: `Erro ao listar aquisições!` });
+          return throwError(error)
+        })
+      )
+      .subscribe();
   }
 
 }

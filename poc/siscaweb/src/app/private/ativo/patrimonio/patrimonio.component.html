@@ -1,0 +1,175 @@
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col">
+
+            <div class="card border-dark shadow-lg mt-5">
+
+                <div class="card-header">
+                    <strong> Cadastro Patrimônio </strong>
+                </div>
+
+                <div class="card-body">
+                    <fieldset class="mb-2" *ngIf="ativo" >
+                        <legend>Ativo</legend>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label><strong>Nome: </strong></label>
+                                    <span>{{ativo.nome}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>Descrição: </strong></label>
+                                    <span>{{ativo.nome}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>Duravel: </strong></label>
+                                    <span>{{ativo.duravel ? 'Sim' : 'Não'}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>Data Inclusão: </strong></label>
+                                    <span>{{ativo.dataInclusao | date: 'dd/MM/yyyy HH:mm'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="mb-2"  *ngIf="solicitacao" >
+                        <legend>Solicitação</legend>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label><strong>Nome: </strong></label>
+                                    <span>{{solicitacao.nome}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>Descrição: </strong></label>
+                                    <span>{{solicitacao.descricao}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>Quantidade: </strong></label>
+                                    <span>{{solicitacao.quantidade}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>Data Inclusão: </strong></label>
+                                    <span>{{solicitacao.dataInclusao | date: 'dd/MM/yyyy HH:mm'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="mb-2" *ngIf="aquisicao" >
+                        <legend>Aquisição</legend>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label><strong>CNPJ: </strong></label>
+                                    <span>{{aquisicao.cnpj}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>Nota Fiscal: </strong></label>
+                                    <span>{{aquisicao.notaFiscal}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>Quantidade: </strong></label>
+                                    <span>{{aquisicao.quantidade}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>Valor: </strong></label>
+                                    <span>{{aquisicao.valor}}</span>
+                                </div>
+                                <div class="col-6">
+                                    <label><strong>Data Inclusão: </strong></label>
+                                    <span>{{aquisicao.dataInclusao | date: 'dd/MM/yyyy HH:mm'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button p-button-secondary mb-2"
+                        pTooltip="Novo Ativo" tooltipPosition="top" (click)="cadastrar()"></button>
+
+                    <p-table [value]="patrimonios" [paginator]="true" [rows]="5" dataKey="id"
+                        styleClass="p-datatable-striped p-datatable-responsive-demo">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th scope="col">Número</th>
+                                <th scope="col">Data Inclusão</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-patrimonio>
+                            <tr>
+                                <td>{{patrimonio.numero}}</td>
+                                <td>{{patrimonio.dataInclusao | date: 'dd/MM/yyyy HH:mm'}}</td>
+                                <td>
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Editar patrimônio"
+                                        tooltipPosition="top" (click)="editar(patrimonio)"></button>
+                                    <button pButton pRipple icon="pi pi-trash"
+                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Remover patrimônio"
+                                        tooltipPosition="top" (click)="remover(patrimonio)"></button>
+                                    <button pButton pRipple icon="bi bi-geo-alt"
+                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Alocar patrimônio"
+                                        tooltipPosition="top" (click)="alocar(patrimonio)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<form [formGroup]="formPatrimonio" (ngSubmit)="onSubmitPatrimonio()">
+    <p-dialog [(visible)]="dialogPatrimonioOpen" [style]="{width: '450px'}"
+        header="{{patrimonio?.id ? 'Editar' : 'Cadastrar'}} Patrimonio" [modal]="true" styleClass="p-fluid"
+        [closeOnEscape]="false" [closable]="false">
+        <ng-template pTemplate="content">
+            <div class="form-group">
+                <label><strong>Nome:</strong></label>
+                <br>
+                <span>{{ativo?.nome}}</span>
+            </div>
+            <div class="form-group">
+                <label><strong>Descrição:</strong></label>
+                <br>
+                <span>{{ativo?.descricao}}</span>
+            </div>
+            <div class="form-group">
+                <label for="numero">Número:</label>
+                <input type="text" class="form-control" id="numero" formControlName="numero">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button type="button" pButton pRipple label="Cancelar" icon="pi pi-times"
+                class="p-button p-button-secondary" (click)="hideDialogPatrimonio()"></button>
+            <button type="submit" pButton pRipple label="Salvar" icon="pi pi-check"
+                class="p-button p-button-secondary"></button>
+        </ng-template>
+    </p-dialog>
+</form>
+
+<p-dialog [(visible)]="dialogAlocacaoOpen" [style]="{width: '832px'}" (onShow)="initDialogMap()" 
+    header="{{alocacao?.id ? 'Editar' : 'Cadastrar'}} Alocacao" [modal]="true" styleClass="p-fluid"
+    [closeOnEscape]="false" [closable]="false">
+    <ng-template pTemplate="content">
+        <div id="map" style="width: 800px; height: 600px;" ></div>
+        <p-dropdown [options]="locais" (onChange)="onChange($event)" appendTo="body" ></p-dropdown>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button p-button-secondary"
+            (click)="hideDialogAlocacao()"></button>
+        <button type="button" pButton pRipple label="Salvar" icon="pi pi-check" class="p-button p-button-secondary"
+            (click)="salvarAlocacao()"></button>
+    </ng-template>
+</p-dialog>
+

@@ -20,4 +20,6 @@ public interface PatrimonioService {
 	
 	void update(PatrimonioDTO dto); 
 	
+	List<PatrimonioDTO> findAllByAtivoId(final BigInteger id);
+	
 }
