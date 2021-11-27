@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { Aquisicao } from 'src/app/model/aquisicao';
@@ -27,7 +27,8 @@ export class AquisicaoComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly aquisicaoService: AquisicaoService,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+    private readonly confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -81,7 +82,14 @@ export class AquisicaoComponent implements OnInit {
   }
 
   public remover(aquisicao: Aquisicao): void {
-    this.aquisicao = aquisicao;
+    this.confirmationService.confirm({
+      message: `Deseja realmente remover o aquisição cnpj: ${aquisicao?.cnpj} para nota fiscal: ${aquisicao.notaFiscal} ?`,
+      header: 'Atenção',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.messageService.add({ key: 'tc', severity: 'success', summary: 'Success', detail: 'Aquisição removida com sucesso!' });
+      }
+    });
   }
 
   public onSubmitAquisicao(): void {

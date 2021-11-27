@@ -18,8 +18,8 @@ import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './loader/loader.service';
 
 
-import {ToastModule} from 'primeng/toast';
-import {MessageService} from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [

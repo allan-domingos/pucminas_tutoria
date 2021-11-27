@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 import { AuthService } from 'src/app/common/auth.service';
-import { ConfirmService } from '../confirm/confirm.service';
-import { ConfirmEvent } from '../confirm/model/confirm-event';
+
 
 @Component({
   selector: 'sgm-header',
@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authService : AuthService,
-    private confirmService: ConfirmService
+    private readonly confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -31,12 +31,14 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout(){
-    this.confirmService.emit(new ConfirmEvent(
-      'Deseja realmente sair?',
-      () => {
+    this.confirmationService.confirm({
+      message: `Deseja realmente sair?`,
+      header: 'Atenção',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
         this.authService.logout();
-      })
-    );
+      }
+    });
   }
 
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertaService } from 'src/app/alerta/alerta.service';
 import { AuthService } from 'src/app/common/auth.service';
 import { Funcionario } from 'src/app/model/funcionario';
 import { ProfileService } from './profile.service';

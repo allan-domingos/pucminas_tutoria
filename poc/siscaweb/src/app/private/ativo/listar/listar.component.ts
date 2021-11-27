@@ -11,8 +11,7 @@ import { AtivoService } from '../ativo.service';
 @Component({
   selector: 'siscaweb-listar',
   templateUrl: './listar.component.html',
-  styleUrls: ['./listar.component.css'],
-  providers: [ConfirmationService]
+  styleUrls: ['./listar.component.css']
 })
 export class ListarComponent implements OnInit {
 

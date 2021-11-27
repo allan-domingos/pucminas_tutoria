@@ -12,19 +12,17 @@ import { Feature, Map as MapOL, View } from 'ol';
 import { AuthService } from 'src/app/common/auth.service';
 import { INPEWMS } from '../geo/inpe.wms';
 import { Terreno } from 'src/app/model/terreno';
-import { ConfirmEvent } from '../confirm/model/confirm-event';
-import { ConfirmService } from '../confirm/confirm.service';
 import Geometry from 'ol/geom/Geometry';
 import { Draw, Modify, Select, Snap } from 'ol/interaction';
 import GeometryType from 'ol/geom/GeometryType';
 import { VectorSourceEvent } from 'ol/source/Vector';
 import Polygon from 'ol/geom/Polygon';
 import GeometryLayout from 'ol/geom/GeometryLayout';
-import { AlertaService } from 'src/app/alerta/alerta.service';
-import { catchError, filter, finalize, switchMap, tap } from 'rxjs/operators';
+import { filter, finalize, switchMap, tap } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { of } from 'rxjs';
 import { Geo } from 'src/app/model/geo';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'sgm-map',
@@ -82,9 +80,9 @@ export class MapComponent implements OnInit, AfterViewInit {
   constructor(
     private readonly mapService: MapService,
     private readonly authService: AuthService,
-    private readonly confirmService: ConfirmService,
-    private readonly alertaService: AlertaService,
+    private readonly messageService: MessageService,
     private readonly datePipe: DatePipe,
+    private readonly confirmationService: ConfirmationService
   ) {
 
     this.iniciarVariaveisComponentes();
@@ -298,26 +296,26 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.marcaTerreno = new MarcaTerreno();
     this.marcaTerreno.addClickListener((clicked) => {
       if (clicked && this.terreno && !this.drawSource.isEmpty()) {
-        this.confirmService.emit(
-          new ConfirmEvent(
-            `Já há uma marcação para este terreno de matricula ${this.terreno.matricula}! deseja efetuar uma nova marcação?`,
-            () => {
-              this.drawSource.clear();
-              this.terreno.coordenadas = undefined;
-              this.snapInteraction.setActive(true);
-              this.drawInteraction.setActive(true);
-              this.selectInteraction.setActive(false);
-              this.modifyInteraction.setActive(false);
-            },
-            () => {
-              this.marcaTerreno.disabledMark();
-              this.snapInteraction.setActive(false);
-              this.drawInteraction.setActive(false);
-              this.selectInteraction.setActive(true);
-              this.modifyInteraction.setActive(true);
-            }
-          )
-        );
+        this.confirmationService.confirm({
+          message: `Já há uma marcação para este terreno de matricula ${this.terreno.matricula}! deseja efetuar uma nova marcação?`,
+          header: 'Atenção',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.drawSource.clear();
+            this.terreno.coordenadas = undefined;
+            this.snapInteraction.setActive(true);
+            this.drawInteraction.setActive(true);
+            this.selectInteraction.setActive(false);
+            this.modifyInteraction.setActive(false);
+          },
+          reject: () => {
+            this.marcaTerreno.disabledMark();
+            this.snapInteraction.setActive(false);
+            this.drawInteraction.setActive(false);
+            this.selectInteraction.setActive(true);
+            this.modifyInteraction.setActive(true);
+          }
+        });
       } else {
         this.snapInteraction.setActive(clicked);
         this.drawInteraction.setActive(clicked);
@@ -422,20 +420,20 @@ export class MapComponent implements OnInit, AfterViewInit {
   public selecionarTerreno(terreno: Terreno): void {
     if (this.terreno && terreno.id === this.terreno.id) {
       if (!this.drawVector.getSource().isEmpty()) {
-        this.confirmService.emit(
-          new ConfirmEvent(
-            `Deseja realmente cancelar a marcação do terrreno de matricula ${terreno.matricula}?`,
-            () => {
-              this.drawVector.getSource().clear();
-              this.terreno = null;
-              this.marcaTerreno.disabled(true)
-              this.drawInteraction.setActive(false);
-              this.snapInteraction.setActive(false);
-              this.selectInteraction.setActive(true);
-              this.modifyInteraction.setActive(true);
-            }
-          )
-        );
+        this.confirmationService.confirm({
+          message: `Deseja realmente cancelar a marcação do terrreno de matricula ${terreno.matricula}?`,
+          header: 'Atenção',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.drawVector.getSource().clear();
+            this.terreno = null;
+            this.marcaTerreno.disabled(true)
+            this.drawInteraction.setActive(false);
+            this.snapInteraction.setActive(false);
+            this.selectInteraction.setActive(true);
+            this.modifyInteraction.setActive(true);
+          }
+        });
       } else {
         this.terreno = null;
         this.marcaTerreno.disabled(true);
@@ -509,14 +507,15 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   public limparCoordenada(terreno: Terreno): void {
-    this.confirmService.emit(new ConfirmEvent(
-      `Deseja realmente remover a marcação do terreno de matricula: ${terreno.matricula}`,
-      () => {
+    this.confirmationService.confirm({
+      message: `Deseja realmente remover a marcação do terreno de matricula: ${terreno.matricula}`,
+      header: 'Atenção',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
         terreno.coordenadas = undefined;
         this.drawSource.clear();
       }
-    ));
-
+    });
   }
 
   public salvarCoordenada(terreno: Terreno): void {
@@ -530,8 +529,8 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.mapService
       .saveTerrenosGeo(geo)
       .subscribe(
-        () => this.alertaService.info('Coordenada cadastrada com sucesso!'),
-        (err) =>  this.alertaService.error('Erro ao cadastra coordenada.')
+        () =>  this.messageService.add({ key: 'tc', severity: 'success', summary: 'Success', detail: `Coordenada cadastrada com sucesso!` }),
+        (err) => this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Erro ao cadastra coordenada!' })
       );
   }
 

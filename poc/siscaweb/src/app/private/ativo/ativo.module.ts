@@ -9,7 +9,6 @@ import { ROUTES } from './aitvo.routes';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
@@ -24,7 +23,6 @@ import {TooltipModule} from 'primeng/tooltip';
     TableModule,
     ButtonModule,
     DialogModule,
-    ConfirmDialogModule,
     TooltipModule
   ]
 })

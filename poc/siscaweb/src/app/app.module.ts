@@ -13,16 +13,16 @@ import { OAUTH } from './app.oauth';
 import { AuthService } from './common/auth.service';
 import { LoginInterceptor } from './common/login.interceptor';
 import { PrivateGuard } from './private/private.guard';
-import { AlertaService } from './alerta/alerta.service';
 import { OAuthGlobalErrorHandler } from './common/oauth-global-error.handler';
-import { AlertaComponent } from './alerta/alerta.component';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './loader/loader.service';
+
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlertaComponent,
     LoaderComponent,
   ],
   imports: [
@@ -30,9 +30,10 @@ import { LoaderService } from './loader/loader.service';
     RouterModule.forRoot(ROUTES),
     HttpClientModule,
     OAuthModule.forRoot(OAUTH),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastModule
   ],
-  providers: [AuthService, PrivateGuard, AlertaService, LoaderService,
+  providers: [AuthService, PrivateGuard, LoaderService, MessageService,
     { provide: ErrorHandler, useClass: OAuthGlobalErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true }
   ]
