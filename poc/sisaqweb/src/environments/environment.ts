@@ -18,6 +18,10 @@ export const environment = {
   oidc: true,
   skipIssuerCheck: true,
 
+  wso2_sisca_api: 'https://allandomingos.ddns.net/rest/sisca/v1',
+  wso2_sisaq_api: 'https://allandomingos.ddns.net/rest/sisaq/v1',
+  wso2_sismb_api: 'https://allandomingos.ddns.net/rest/sismb/v1',
+
   wso2_sgm_safim: 'https://allandomingos.ddns.net/rest/safim/v1',
   wso2_sgm_ibge_dados: 'https://allandomingos.ddns.net/rest/ibge/dados/v1',
   wso2_sgm_ibge_geo: 'https://allandomingos.ddns.net/rest/ibge/geo/v1/wms',

@@ -120,4 +120,17 @@ public class AquisicaoServiceImpl implements AquisicaoService {
 		}).collect(Collectors.toList());
 	}
 
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
+	public List<AquisicaoDTO> findAllBySolicitacaoId(BigInteger id) {
+		List<Aquisicao> aquisicoes = this.aquisicaoRepository.findAllBySolicitacaoId(id);
+
+		return aquisicoes.stream().map((aquisicao) -> {
+			SolicitacaoDTO so = SolicitacaoServiceImpl.entityToDto(aquisicao.getSolicitacao());
+			AquisicaoDTO aq = AquisicaoServiceImpl.entityToDto(aquisicao);
+			aq.setSolicitacao(so);
+			return aq;
+		}).collect(Collectors.toList());
+	}
+
 }

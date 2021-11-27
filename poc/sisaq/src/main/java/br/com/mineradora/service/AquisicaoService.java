@@ -22,4 +22,6 @@ public interface AquisicaoService {
 	
 	List<AquisicaoDTO> findAllByAtivoId(final BigInteger id);
 	
+	List<AquisicaoDTO> findAllBySolicitacaoId(final BigInteger id);
+	
 }

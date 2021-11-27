@@ -40,5 +40,13 @@ public class AquisicaoRepositoryImpl extends AbstractRepository<Aquisicao> imple
 		query.setParameter("id", id);
 		return query.getResultList();
 	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Aquisicao> findAllBySolicitacaoId(final BigInteger id) {
+		Query query = this.em.createQuery("SELECT aq FROM Aquisicao aq JOIN aq.solicitacao so WHERE so.id = :id ");
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
 
 }

@@ -14,5 +14,7 @@ import br.com.mineradora.entity.Aquisicao;
 public interface AquisicaoRepository extends Repository<Aquisicao> {
 
 	public List<Aquisicao> findAllByAtivoId(final BigInteger id);
+	
+	public List<Aquisicao> findAllBySolicitacaoId(final BigInteger id);
 
 }
