@@ -43,6 +43,9 @@ public class AlocacaoServiceImpl extends AbstractService implements AlocacaoServ
 	private LocalRepository localRepositorye;
 
 	public static AlocacaoDTO entityToDto(Alocacao alocacao) {
+		if(alocacao == null)
+			return null;
+		
 		AlocacaoDTO dto = new AlocacaoDTO();
 		dto.setId(alocacao.getId());
 		dto.setDataInclusao(alocacao.getDataInclusao());
@@ -51,6 +54,9 @@ public class AlocacaoServiceImpl extends AbstractService implements AlocacaoServ
 	}
 
 	public static Alocacao dtoToEntity(AlocacaoDTO dto) {
+		if(dto == null)
+			return null;
+		
 		Alocacao entity = new Alocacao();
 		entity.setId(dto.getId());
 		entity.setDataInclusao(dto.getDataInclusao());

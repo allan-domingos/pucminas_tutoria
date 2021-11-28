@@ -13,6 +13,6 @@ import br.com.mineradora.entity.Patrimonio;
  */
 public interface PatrimonioRepository extends Repository<Patrimonio> {
 	
-	List<Patrimonio> findAllByAtivoId(final BigInteger id);
+	List<Patrimonio> findAllByAtivoIdNaoAlocado(final BigInteger id);
 	
 }

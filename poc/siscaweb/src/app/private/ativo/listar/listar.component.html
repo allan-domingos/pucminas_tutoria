@@ -12,7 +12,7 @@
 
                 <div class="card-body">
 
-                    <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button p-button-secondary mb-2"
+                    <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-rounded p-button-secondary mb-2"
                         pTooltip="Novo Ativo" tooltipPosition="top" (click)="cadastrar()"></button>
 
                     <p-table [value]="ativos" [paginator]="true" [rows]="5" dataKey="id" (onRowExpand)="onRowExpand($event)"
@@ -79,7 +79,7 @@
                                                 <td>{{aquisicao.valor}}</td>
                                                 <td>{{aquisicao.dataInclusao | date: 'dd/MM/yyyy HH:mm'}}</td>
                                                 <td>
-                                                    <button pButton pRipple icon="bi bi-geo-alt" [routerLink]="['/ativo/patrimonio',aquisicao.id]"
+                                                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/ativo/patrimonio',aquisicao.id]"
                                                         class="p-button-rounded p-button-secondary mr-2" pTooltip="Cadastra Patrimonio"
                                                         tooltipPosition="top">
                                                     </button>

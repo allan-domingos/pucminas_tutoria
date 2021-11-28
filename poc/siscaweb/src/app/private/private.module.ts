@@ -9,8 +9,6 @@ import { HomeComponent } from './home/home.component';
 
 import { ROUTES } from './private.routes';
 import { HeaderComponent } from './header/header.component';
-import { MapComponent } from './map/map.component';
-import { ProfileComponent } from './profile/profile.component';
 import { CpfPipe } from './pipe/cpf.pipe';
 
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -21,8 +19,6 @@ import { ConfirmationService } from 'primeng/api';
     PrivateComponent,
     HomeComponent,
     HeaderComponent,
-    MapComponent,
-    ProfileComponent,
     CpfPipe
   ],
   imports: [

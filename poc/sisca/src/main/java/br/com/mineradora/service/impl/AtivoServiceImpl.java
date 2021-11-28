@@ -28,6 +28,9 @@ public class AtivoServiceImpl extends AbstractService implements AtivoService {
 	private AtivoRepository ativoRepository;
 	
 	public static AtivoDTO entityToDto(Ativo entity) {
+		if(entity == null)
+			return null;
+		
 		AtivoDTO dto = new AtivoDTO();
 		dto.setId(entity.getId());
 		dto.setDescricao(entity.getDescricao());
@@ -38,6 +41,9 @@ public class AtivoServiceImpl extends AbstractService implements AtivoService {
 	}
 	
 	public static Ativo dtoToEntity(AtivoDTO dto) {
+		if(dto == null)
+			return null;
+		
 		Ativo entity = new Ativo();
 		entity.setId(dto.getId());
 		entity.setDescricao(dto.getDescricao());

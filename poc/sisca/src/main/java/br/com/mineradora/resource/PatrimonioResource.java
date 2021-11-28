@@ -48,9 +48,9 @@ public class PatrimonioResource {
         return ResponseEntity.ok().build();
     } 
 	
-	@RequestMapping(value ="ativo/{id}" , method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value ="ativo/{id}/nao-alocado" , method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findAllByAtivoId(@PathVariable("id") final BigInteger id) {
-        return ResponseEntity.ok(this.patrimonioService.findAllByAtivoId(id));
+        return ResponseEntity.ok(this.patrimonioService.findAllByAtivoIdNaoAlocado(id));
     }
 	
 }

@@ -128,7 +128,7 @@ export class ListarComponent implements OnInit {
       descricao: this.ativo.descricao,
       quantidade: undefined
     });
-    this.dialogSolicitacaoOpen = true;
+    this.dialogSolicitacaoOpen = false;
   }
 
   public onSubmitSolicitacao(): void {

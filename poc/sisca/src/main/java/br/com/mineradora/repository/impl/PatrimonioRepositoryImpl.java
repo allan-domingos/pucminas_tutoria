@@ -35,8 +35,8 @@ public class PatrimonioRepositoryImpl extends AbstractRepository<Patrimonio> imp
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Patrimonio> findAllByAtivoId(final BigInteger id) {
-		Query query = this.em.createQuery("SELECT pa FROM Patrimonio pa JOIN pa.ativo at WHERE at.id = :id ");
+	public List<Patrimonio> findAllByAtivoIdNaoAlocado(final BigInteger id) {
+		Query query = this.em.createNativeQuery("SELECT P.* FROM PATRIMONIO P LEFT JOIN ALOCACAO A ON P.ID = A.PATRIMONIO_ID  WHERE P.ATIVO_ID = :id AND A.ID IS NULL", Patrimonio.class);
 		query.setParameter("id", id);
 		return query.getResultList();
 	}

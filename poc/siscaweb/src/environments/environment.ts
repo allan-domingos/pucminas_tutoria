@@ -22,13 +22,6 @@ export const environment = {
   wso2_sisaq_api: 'https://allandomingos.ddns.net/rest/sisaq/v1',
   wso2_sismb_api: 'https://allandomingos.ddns.net/rest/sismb/v1',
 
-  wso2_sgm_safim: 'https://allandomingos.ddns.net/rest/safim/v1',
-  wso2_sgm_ibge_dados: 'https://allandomingos.ddns.net/rest/ibge/dados/v1',
-  wso2_sgm_ibge_geo: 'https://allandomingos.ddns.net/rest/ibge/geo/v1/wms',
-  wso2_sgm_inpe_geo: 'https://allandomingos.ddns.net/rest/inpe/geo/v1/ows',
-  wso2_sgm_stur: 'https://allandomingos.ddns.net/rest/stur/v1',
-  wso2_sgm_mimg: 'https://allandomingos.ddns.net/rest/mimg/v1',
-
   loader_time_show: 500,
   loader_time_hiden: 0
 };

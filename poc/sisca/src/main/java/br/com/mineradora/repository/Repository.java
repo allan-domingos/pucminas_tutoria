@@ -12,14 +12,14 @@ import java.util.List;
  */
 public interface Repository<T extends Serializable> extends Serializable {
 
-	public void save(T t);
+	void save(T t);
 
-	public void update(T t);
+	void update(T t);
 
-	public void delete(T t);
+	void delete(T t);
 
-	public T findById(BigInteger id);
+	T findById(BigInteger id);
 
-	public List<T> findAll();
+	List<T> findAll();
 
 }

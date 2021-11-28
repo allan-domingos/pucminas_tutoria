@@ -1,4 +1,3 @@
-
 <div class="container">
 
     <div class="row">
@@ -12,7 +11,7 @@
                 </div>
 
                 <div class="card-body">
-                    <fieldset class="mb-2" *ngIf="ativo" >
+                    <fieldset class="mb-2" *ngIf="ativo">
                         <legend>Ativo</legend>
                         <div class="container">
                             <div class="row">
@@ -22,7 +21,7 @@
                                 </div>
                                 <div class="col-6">
                                     <label><strong>Descrição: </strong></label>
-                                    <span>{{ativo.nome}}</span>
+                                    <span>{{ativo.descricao}}</span>
                                 </div>
                                 <div class="col-6">
                                     <label><strong>Duravel: </strong></label>
@@ -36,7 +35,7 @@
                         </div>
                     </fieldset>
 
-                    <fieldset class="mb-2"  *ngIf="solicitacao" >
+                    <fieldset class="mb-2" *ngIf="solicitacao">
                         <legend>Solicitação</legend>
                         <div class="container">
                             <div class="row">
@@ -60,7 +59,7 @@
                         </div>
                     </fieldset>
 
-                    <fieldset class="mb-2" *ngIf="aquisicao" >
+                    <fieldset class="mb-2" *ngIf="aquisicao">
                         <legend>Aquisição</legend>
                         <div class="container">
                             <div class="row">
@@ -88,7 +87,7 @@
                         </div>
                     </fieldset>
 
-                    <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button p-button-secondary mb-2"
+                    <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-rounded p-button-secondary mb-2"
                         pTooltip="Novo Ativo" tooltipPosition="top" (click)="cadastrar()"></button>
 
                     <p-table [value]="patrimonios" [paginator]="true" [rows]="5" dataKey="id"
@@ -119,6 +118,11 @@
                         </ng-template>
                     </p-table>
 
+                </div>
+
+                <div class="card-footer">
+                    <button pButton pRipple icon="pi pi-arrow-left" label="Voltar" [routerLink]="['/ativo']"
+                        class="p-button-rounded p-button-secondary"> </button>
                 </div>
 
             </div>
@@ -158,18 +162,17 @@
     </p-dialog>
 </form>
 
-<p-dialog [(visible)]="dialogAlocacaoOpen" [style]="{width: '832px'}" (onShow)="initDialogMap()" 
+<p-dialog [(visible)]="dialogAlocacaoOpen" [style]="{width: '832px'}" (onShow)="initDialogMap()"
     header="{{alocacao?.id ? 'Editar' : 'Cadastrar'}} Alocacao" [modal]="true" styleClass="p-fluid"
     [closeOnEscape]="false" [closable]="false">
     <ng-template pTemplate="content">
-        <div id="map" style="width: 800px; height: 600px;" ></div>
-        <p-dropdown [options]="locais" (onChange)="onChange($event)" appendTo="body" ></p-dropdown>
+        <div id="map" style="width: 800px; height: 600px;"></div>
+        <p-dropdown [options]="locais" (onChange)="onChange($event)" appendTo="body"></p-dropdown>
     </ng-template>
     <ng-template pTemplate="footer">
         <button type="button" pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button p-button-secondary"
             (click)="hideDialogAlocacao()"></button>
-        <button type="button" pButton pRipple label="Salvar" icon="pi pi-check" class="p-button p-button-secondary"
-            (click)="salvarAlocacao()"></button>
+        <button type="button" pButton pRipple label="Salvar" [disabled]="!local" icon="pi pi-check"
+            class="p-button p-button-secondary" (click)="salvarAlocacao()"></button>
     </ng-template>
 </p-dialog>
-

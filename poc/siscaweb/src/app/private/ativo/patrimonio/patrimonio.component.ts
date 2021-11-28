@@ -172,7 +172,10 @@ export class PatrimonioComponent implements OnInit {
       this.patrimonio.numero = this.formPatrimonio.controls.numero.value;
       this.ativoService.atualizarPatrimonio(this.patrimonio)
         .subscribe(
-          () => this.messageService.add({ key: 'tc', severity: 'success', summary: 'Success', detail: `Patrimônio atualizado com sucesso!` }),
+          () => {
+            this.initData();
+            this.messageService.add({ key: 'tc', severity: 'success', summary: 'Success', detail: `Patrimônio atualizado com sucesso!` });
+          },
           () => this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: `Erro ao atualizar patrimônio!` }),
           () => this.patrimonio = undefined
         );
@@ -183,7 +186,10 @@ export class PatrimonioComponent implements OnInit {
       }
       this.ativoService.cadastrarPatrimonio(patrimonio)
         .subscribe(
-          () => this.messageService.add({ key: 'tc', severity: 'success', summary: 'Success', detail: `Patrimônio cadastrodo com sucesso!` }),
+          () => {
+            this.initData();
+            this.messageService.add({ key: 'tc', severity: 'success', summary: 'Success', detail: `Patrimônio cadastrodo com sucesso!` });
+          },
           () => this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: `Erro ao cadastrar patrimônio!` }),
           () => this.patrimonio = undefined
         );
@@ -208,24 +214,45 @@ export class PatrimonioComponent implements OnInit {
 
   public hideDialogAlocacao(): void {
     this.dialogAlocacaoOpen = false;
+    this.local = undefined;
+    this.patrimonio = undefined;
   }
 
   public salvarAlocacao(): void {
     this.dialogAlocacaoOpen = false;
-    this.messageService.add({ key: 'tc', severity: 'success', summary: 'Success', detail: 'Alocação efetuada com sucesso!' });
+    let alocacao: Alocacao = {
+      local: this.local,
+      patrimonio: this.patrimonio,
+      ativo: this.ativo,
+      idAquisicao: this.aquisicao.id
+    };
+    this.ativoService.cadastrarAlocacao(alocacao)
+      .subscribe(
+        () => {
+          this.initData();
+          this.messageService.add({ key: 'tc', severity: 'success', summary: 'Success', detail: 'Alocação cadastrada com sucesso!' })
+        },
+        () => this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: `Erro ao cadastrar alocação!` })
+      );
+
   }
 
   public onChange(event: any): void {
-    console.log(event);
     let local: Local = event.value;
+    this.source.clear();
+    this.local = local;
 
-    let feature = new Feature({
-      geometry: new Point(local.coordenadas)
-    });
-    feature.set('style', this.style);
-    this.source.addFeature(feature);
+    if (local) {
 
-    this.flyTo(local.coordenadas, function () { });
+      let feature = new Feature({
+        geometry: new Point(local.coordenadas)
+      });
+      feature.set('style', this.style);
+
+      this.source.addFeature(feature);
+
+      this.flyTo(local.coordenadas, function () { });
+    }
   }
 
   private flyTo(location, done) {

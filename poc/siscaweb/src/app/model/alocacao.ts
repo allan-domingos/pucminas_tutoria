@@ -1,5 +1,5 @@
-import { Local } from "protractor/built/driverProviders";
 import { Ativo } from "./ativo";
+import { Local } from "./local";
 import { Patrimonio } from "./patrimonio";
 
 export interface Alocacao {

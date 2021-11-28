@@ -29,6 +29,9 @@ public class LocalServiceImpl extends AbstractService implements LocalService {
 	private LocalRepository localRepository;
 
 	public static LocalDTO entityToDto(Local local) {
+		if(local == null)
+			return null;
+		
 		LocalDTO dto = new LocalDTO();
 		dto.setId(local.getId());
 		dto.setDataInclusao(local.getDataInclusao());
@@ -38,6 +41,9 @@ public class LocalServiceImpl extends AbstractService implements LocalService {
 	}
 
 	public static Local dtoToEntity(LocalDTO dto) {
+		if(dto == null)
+			return null;
+		
 		Local entity = new Local();
 		entity.setId(dto.getId());
 		entity.setDataInclusao(dto.getDataInclusao());

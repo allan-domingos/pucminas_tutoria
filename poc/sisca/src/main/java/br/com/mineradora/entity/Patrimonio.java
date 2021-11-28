@@ -3,6 +3,7 @@ package br.com.mineradora.entity;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -48,5 +50,9 @@ public class Patrimonio implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, targetEntity = Ativo.class)
 	private Ativo ativo;
+
+	@OneToMany(mappedBy = "patrimonio" )
+	private Set<Alocacao> alocacoes;
+
 	
 }

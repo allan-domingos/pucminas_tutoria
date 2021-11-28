@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { Alocacao } from 'src/app/model/alocacao';
 import { Aquisicao } from 'src/app/model/aquisicao';
 import { Ativo } from 'src/app/model/ativo';
 import { Local } from 'src/app/model/local';
@@ -64,11 +65,15 @@ export class AtivoService {
 
   public litarPatrimonio(idAtivo: number): Observable<Array<Patrimonio>> {
     console.log('idAtivo',idAtivo);
-    return this.http.get<Array<Patrimonio>>(`${environment.wso2_sisca_api}/patrimonio/ativo/${idAtivo}`).pipe(take(1));
+    return this.http.get<Array<Patrimonio>>(`${environment.wso2_sisca_api}/patrimonio/ativo/${idAtivo}/nao-alocado`).pipe(take(1));
   }
 
   public listaLocal(): Observable<Array<Local>> {
     return this.http.get<Array<Local>>(`${environment.wso2_sisca_api}/local`).pipe(take(1));
+  }
+
+  public cadastrarAlocacao(alocacao: Alocacao): Observable<any> {
+    return this.http.post(`${environment.wso2_sisca_api}/alocacao`,alocacao).pipe(take(1));
   }
 
 }
