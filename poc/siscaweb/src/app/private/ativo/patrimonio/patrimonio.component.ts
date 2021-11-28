@@ -11,10 +11,14 @@ import { Patrimonio } from 'src/app/model/patrimonio';
 import { Solicitacao } from 'src/app/model/solicitacao';
 import { AtivoService } from '../ativo.service';
 
-import { Map, View } from 'ol';
+import { Feature, Map, View } from 'ol';
 import { Tile } from 'ol/layer';
 import { OSM } from 'ol/source';
 import { Local } from 'src/app/model/local';
+import { Icon, Style } from 'ol/style';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import Point from 'ol/geom/Point';
 
 @Component({
   selector: 'siscaweb-patrimonio',
@@ -36,7 +40,11 @@ export class PatrimonioComponent implements OnInit {
   public local: Local;
 
   public map: Map;
-  public openStreetMap: Tile;
+  public tile: Tile;
+  public view: View;
+  public style: Style;
+  public vectorIcon: VectorLayer;
+  public source: VectorSource;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -53,31 +61,52 @@ export class PatrimonioComponent implements OnInit {
 
   public initDialogMap(): void {
 
+    this.source = new VectorSource();
+
+    this.vectorIcon = new VectorLayer({
+      style: function (feature) {
+        return feature.get('style');
+      },
+      source: this.source,
+    });
+
+    this.style = new Style({
+      image: new Icon({
+        src: './assets/geo-alt-fill.svg',
+        offset: [0, 0],
+        opacity: 1,
+        scale: 2,
+      }),
+    });
+
+    this.tile = new Tile({
+      source: new OSM()
+    });
+
+    this.view = new View({
+      projection: 'EPSG:4326',
+      center: [0, 0],
+      zoom: 0
+    })
+
     this.ativoService.listaLocal()
-    .pipe(
-      tap((locais: Array<Local>) => {
-        let itens : Array<SelectItem> = [{label: 'Selecione', value: null,}];
-        locais.forEach((local) => itens.push({label: local.nome, value: local}));
-        this.locais = itens;
-      }), 
-      catchError((error) => {
-        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: `Erro ao listar locais!` });
-        return throwError(error);
-      })
-    )
-    .subscribe();
-    
+      .pipe(
+        tap((locais: Array<Local>) => {
+          let itens: Array<SelectItem> = [{ label: 'Selecione', value: null, }];
+          locais.forEach((local) => itens.push({ label: local.nome, value: local }));
+          this.locais = itens;
+        }),
+        catchError((error) => {
+          this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: `Erro ao listar locais!` });
+          return throwError(error);
+        })
+      )
+      .subscribe();
+
     this.map = new Map({
       target: 'map',
-      layers: [
-        new Tile({
-          source: new OSM()
-        })
-      ],
-      view: new View({
-        center: [0, 0],
-        zoom: 0
-      })
+      layers: [this.tile, this.vectorIcon],
+      view: this.view
     });
   }
 
@@ -188,6 +217,50 @@ export class PatrimonioComponent implements OnInit {
 
   public onChange(event: any): void {
     console.log(event);
+    let local: Local = event.value;
+
+    let feature = new Feature({
+      geometry: new Point(local.coordenadas)
+    });
+    feature.set('style', this.style);
+    this.source.addFeature(feature);
+
+    this.flyTo(local.coordenadas, function () { });
+  }
+
+  private flyTo(location, done) {
+    const duration = 2000;
+    const zoom = this.view.getZoom();
+    let parts = 2;
+    let called = false;
+    function callback(complete) {
+      --parts;
+      if (called) {
+        return;
+      }
+      if (parts === 0 || !complete) {
+        called = true;
+        done(complete);
+      }
+    }
+    this.view.animate(
+      {
+        center: location,
+        duration: duration,
+      },
+      callback
+    );
+    this.view.animate(
+      {
+        zoom: zoom - 1,
+        duration: duration / 2,
+      },
+      {
+        zoom: zoom,
+        duration: duration / 2,
+      },
+      callback
+    );
   }
 
 }
