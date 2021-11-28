@@ -2,4 +2,11 @@
 
 <router-outlet></router-outlet>
 
-<sgm-confirm></sgm-confirm>
+<p-confirmDialog #cd [style]="{width: '450px'}">
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" class="p-button p-button-secondary" label="Não"
+            (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" class="p-button p-button-secondary" label="Sim"
+            (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>

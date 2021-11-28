@@ -33,5 +33,7 @@ public class PiezometroDTO implements Serializable {
 	private LocalDateTime data;
 
 	private Sensor sensor;
+	
+	private Double[] coordenadas;
 
 }

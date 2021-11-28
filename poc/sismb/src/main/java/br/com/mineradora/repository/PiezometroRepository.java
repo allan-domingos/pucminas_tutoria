@@ -1,5 +1,7 @@
 package br.com.mineradora.repository;
 
+import java.math.BigInteger;
+
 import br.com.mineradora.entity.Piezometro;
 
 /**
@@ -10,4 +12,6 @@ import br.com.mineradora.entity.Piezometro;
  */
 public interface PiezometroRepository extends Repository<Piezometro> {
 
+	Piezometro findActual(final BigInteger id);
+	
 }

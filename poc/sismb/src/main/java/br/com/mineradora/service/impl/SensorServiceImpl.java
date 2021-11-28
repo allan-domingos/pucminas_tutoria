@@ -22,7 +22,7 @@ import br.com.mineradora.service.SensorService;
  *
  */
 @Service
-public class SensorServiceImpl implements SensorService {
+public class SensorServiceImpl extends AbstractService implements SensorService {
 
 	@Autowired
 	private SensorRepository sensorRepository;

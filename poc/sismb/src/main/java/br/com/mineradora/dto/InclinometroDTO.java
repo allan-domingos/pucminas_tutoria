@@ -31,5 +31,7 @@ public class InclinometroDTO implements Serializable {
 	private LocalDateTime data;
 
 	private Sensor sensor;
+	
+	private Double[] coordenadas;
 
 }

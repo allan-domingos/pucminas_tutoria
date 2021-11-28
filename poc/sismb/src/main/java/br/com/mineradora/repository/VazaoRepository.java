@@ -1,5 +1,7 @@
 package br.com.mineradora.repository;
 
+import java.math.BigInteger;
+
 import br.com.mineradora.entity.Vazao;
 
 /**
@@ -10,4 +12,6 @@ import br.com.mineradora.entity.Vazao;
  */
 public interface VazaoRepository extends Repository<Vazao> {
 
+	Vazao findActual(final BigInteger id);
+	
 }

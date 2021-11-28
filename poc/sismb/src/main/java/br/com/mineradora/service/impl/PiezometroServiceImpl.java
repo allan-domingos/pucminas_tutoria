@@ -22,7 +22,7 @@ import br.com.mineradora.service.PiezometroService;
  *
  */
 @Service
-public class PiezometroServiceImpl implements PiezometroService {
+public class PiezometroServiceImpl extends AbstractService implements PiezometroService {
 
 	@Autowired
 	private PiezometroRepository piezometroRepository;

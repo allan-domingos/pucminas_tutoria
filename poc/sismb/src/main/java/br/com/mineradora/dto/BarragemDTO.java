@@ -28,6 +28,8 @@ public class BarragemDTO implements Serializable {
 	private String nome;
 
 	private LocalDateTime dataInclusao;
+	
+	private Double[] coordenadas;
 
 	private List<SensorDTO> sensores;
 

@@ -1,13 +1,14 @@
 import { HttpResponse } from "@angular/common/http";
 import { Injectable, NgZone } from "@angular/core";
 import { OAuthResourceServerErrorHandler } from "angular-oauth2-oidc";
+import { MessageService } from "primeng/api";
 import { Observable, throwError } from "rxjs";
-import { AlertaService } from "../alerta/alerta.service";
+
 
 @Injectable()
 export class OAuthGlobalErrorHandler implements OAuthResourceServerErrorHandler {
 
-    constructor(private zone : NgZone, private alertaService : AlertaService) {}
+    constructor(private zone : NgZone, private messageService : MessageService) {}
 
     public handleError(response: HttpResponse<any> ): Observable<any> {
         
@@ -20,7 +21,7 @@ export class OAuthGlobalErrorHandler implements OAuthResourceServerErrorHandler 
             switch(err.status){
 
                 case 401 :{
-                    this.alertaService.error("Autorização negada!");
+                    this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: `Autorização negada!` });
                     break;
                 }
             }

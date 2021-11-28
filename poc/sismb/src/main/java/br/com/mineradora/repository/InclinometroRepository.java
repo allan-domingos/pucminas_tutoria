@@ -1,5 +1,7 @@
 package br.com.mineradora.repository;
 
+import java.math.BigInteger;
+
 import br.com.mineradora.entity.Inclinometro;
 
 /**
@@ -10,4 +12,6 @@ import br.com.mineradora.entity.Inclinometro;
  */
 public interface InclinometroRepository extends Repository<Inclinometro> {
 
+	Inclinometro findActual(final BigInteger id);
+	
 }

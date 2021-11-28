@@ -22,7 +22,7 @@ import br.com.mineradora.service.CargaTensaoService;
  *
  */
 @Service
-public class CargaTensaoServiceImpl implements CargaTensaoService {
+public class CargaTensaoServiceImpl extends AbstractService implements CargaTensaoService {
 
 	@Autowired
 	private CargaTensaoRepository cargaTensaoRepository;

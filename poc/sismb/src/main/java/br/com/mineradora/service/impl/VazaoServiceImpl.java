@@ -22,7 +22,7 @@ import br.com.mineradora.service.VazaoService;
  *
  */
 @Service
-public class VazaoServiceImpl implements VazaoService {
+public class VazaoServiceImpl extends AbstractService implements VazaoService {
 
 	
 	@Autowired

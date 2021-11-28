@@ -1,5 +1,7 @@
 package br.com.mineradora.repository;
 
+import java.math.BigInteger;
+
 import br.com.mineradora.entity.CargaTensao;
 
 /**
@@ -10,4 +12,6 @@ import br.com.mineradora.entity.CargaTensao;
  */
 public interface CargaTensaoRepository extends Repository<CargaTensao> {
 
+	CargaTensao findActual(final BigInteger id);
+	
 }

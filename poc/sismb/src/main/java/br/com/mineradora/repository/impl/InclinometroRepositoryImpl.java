@@ -3,6 +3,8 @@ package br.com.mineradora.repository.impl;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.mineradora.entity.Inclinometro;
@@ -30,6 +32,14 @@ public class InclinometroRepositoryImpl extends AbstractRepository<Inclinometro>
 	@Override
 	public List<Inclinometro> findAll() {
 		return super.findAll(Inclinometro.class);
+	}
+	
+	@Override
+	public Inclinometro findActual(final BigInteger id) {
+		Query query = this.em.createQuery("SELECT ct FROM Inclinometro ct JOIN FETCH ct.sensor sr JOIN sr.barragem bm WHERE bm.id = :id ORDER BY ct.dataInclusao DESC");
+		query.setParameter("id", id);
+		query.setMaxResults(1);
+		return (Inclinometro) query.getSingleResult();
 	}
 
 }

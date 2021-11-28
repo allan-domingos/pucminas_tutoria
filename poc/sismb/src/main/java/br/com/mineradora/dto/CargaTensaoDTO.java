@@ -30,5 +30,7 @@ public class CargaTensaoDTO implements Serializable {
 	private LocalDateTime data;
 
 	private SensorDTO sensor;
+	
+	private Double[] coordenadas;
 
 }

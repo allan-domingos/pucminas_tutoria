@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.locationtech.jts.geom.Polygon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -23,20 +24,26 @@ import br.com.mineradora.service.BarragemService;
  *
  */
 @Service
-public class BarragemServiceImpl implements BarragemService {
+public class BarragemServiceImpl extends AbstractService implements BarragemService {
 
 	@Autowired
 	private BarragemRepository barragemRepository;
 
 	public static BarragemDTO entityToDto(Barragem entity) {
+		if(entity == null)
+			return null;
+		
 		BarragemDTO dto = new BarragemDTO();
 		dto.setId(entity.getId());
 		dto.setDataInclusao(entity.getDataInclusao());
-		dto.setNome(dto.getNome());
+		dto.setNome(entity.getNome());
 		return dto;
 	}
 
 	public static Barragem dtoToEntity(BarragemDTO dto) {
+		if(dto == null)
+			return null;
+		
 		Barragem entity = new Barragem();
 		entity.setId(dto.getId());
 		entity.setDataInclusao(dto.getDataInclusao());
@@ -50,15 +57,19 @@ public class BarragemServiceImpl implements BarragemService {
 		List<Barragem> barragens = this.barragemRepository.findAll();
 
 		return barragens.stream().map((barragem) -> {
-			return BarragemServiceImpl.entityToDto(barragem);
+			BarragemDTO dto=  BarragemServiceImpl.entityToDto(barragem);
+			dto.setCoordenadas(polygonToDoubleArray((Polygon)barragem.getGeometry()));
+			return dto;
 		}).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED, readOnly = true)
 	public BarragemDTO findById(final BigInteger id) {
-		Barragem aquisicao = this.barragemRepository.findById(id);
-		return BarragemServiceImpl.entityToDto(aquisicao);
+		Barragem barragem = this.barragemRepository.findById(id);
+		BarragemDTO dto = BarragemServiceImpl.entityToDto(barragem);
+		dto.setCoordenadas(polygonToDoubleArray((Polygon)barragem.getGeometry()));
+		return dto;
 	}
 
 	@Override

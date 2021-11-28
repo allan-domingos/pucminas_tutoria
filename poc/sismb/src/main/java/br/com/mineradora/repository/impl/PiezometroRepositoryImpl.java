@@ -3,6 +3,8 @@ package br.com.mineradora.repository.impl;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.mineradora.entity.Piezometro;
@@ -30,6 +32,14 @@ public class PiezometroRepositoryImpl extends AbstractRepository<Piezometro> imp
 	@Override
 	public List<Piezometro> findAll() {
 		return super.findAll(Piezometro.class);
+	}
+	
+	@Override
+	public Piezometro findActual(final BigInteger id) {
+		Query query = this.em.createQuery("SELECT ct FROM Piezometro ct JOIN FETCH ct.sensor sr JOIN sr.barragem bm WHERE bm.id = :id ORDER BY ct.dataInclusao DESC");
+		query.setParameter("id", id);
+		query.setMaxResults(1);
+		return (Piezometro) query.getSingleResult();
 	}
 
 }

@@ -22,7 +22,7 @@ import br.com.mineradora.service.InclinometroService;
  *
  */
 @Service
-public class InclinometroServiceImpl implements InclinometroService {
+public class InclinometroServiceImpl extends AbstractService implements InclinometroService {
 
 	@Autowired
 	private InclinometroRepository inclinometroRepository;
