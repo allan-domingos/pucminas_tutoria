@@ -12,31 +12,34 @@
 
                         <div class="col">
 
-                            <div class="w-100" id="map"></div>
-
+                            <div class="w-100" id="map">
+                                <div *ngFor="let dado of dados">
+                                    <div *ngIf="dado.coordenadas && dado.coordenadas.length > 1" id="popup-{{dado.id}}">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-2">
 
                             <div class="form-group">
                                 <label for="coordenacao">Barragens:</label><br>
-                                <p-dropdown [options]="barragens" (onChange)="onChange($event)" ></p-dropdown>
+                                <p-dropdown [options]="barragens" (onChange)="onChange($event)"></p-dropdown>
                             </div>
-                            <div class="form-group" >
-                                <div class="rounded border-dark">
+                            <div class="form-group">
+                                <div class="rounded border border-dark bg-white py-2">
                                     <div class="container">
                                         <div class="row">
-                                            <div class="col-12">
-                                                <strong>nome</strong>
-                                                <span>valor</span>
-                                                <span>data</span>
+                                            <div class="col-12" *ngFor="let dado of dados">
+                                                <strong>{{dado.nome}}</strong><br>
+                                                <span class="p-badge"
+                                                    [ngClass]="nivel(dado.valor)">{{dado.valor}}</span>
+                                                <span class="ml-2"><small>{{dado.data | date: 'dd/MM/yyyy
+                                                        HH:mm:ss'}}</small></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            <div>
-
-
 
                             </div>
 

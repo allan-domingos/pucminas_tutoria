@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.locationtech.jts.geom.Point;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -47,6 +48,7 @@ public class DadoServiceImpl extends AbstractService implements DadoService {
 			return null;
 		
 		DadoDTO dto = new DadoDTO();
+		dto.setId(entity.getSensor().getId());
 		dto.setNome(entity.getSensor().getNome());
 		dto.setValor(entity.getValor());
 		dto.setData(entity.getData());
@@ -58,6 +60,7 @@ public class DadoServiceImpl extends AbstractService implements DadoService {
 			return null;
 		
 		DadoDTO dto = new DadoDTO();
+		dto.setId(entity.getSensor().getId());
 		dto.setNome(entity.getSensor().getNome() + " - Temp");
 		dto.setValor(entity.getTemperatura());
 		dto.setData(entity.getData());
@@ -69,6 +72,7 @@ public class DadoServiceImpl extends AbstractService implements DadoService {
 			return null;
 		
 		DadoDTO dto = new DadoDTO();
+		dto.setId(entity.getSensor().getId());
 		dto.setNome(entity.getSensor().getNome());
 		dto.setValor(entity.getValor());
 		dto.setData(entity.getData());
@@ -80,6 +84,7 @@ public class DadoServiceImpl extends AbstractService implements DadoService {
 			return null;
 		
 		DadoDTO dto = new DadoDTO();
+		dto.setId(entity.getSensor().getId());
 		dto.setNome(entity.getSensor().getNome());
 		dto.setValor(entity.getValor());
 		dto.setData(entity.getData());
@@ -91,6 +96,7 @@ public class DadoServiceImpl extends AbstractService implements DadoService {
 			return null;
 		
 		DadoDTO dto = new DadoDTO();
+		dto.setId(entity.getSensor().getId());
 		dto.setNome(entity.getSensor().getNome());
 		dto.setValor(entity.getValor());
 		dto.setData(entity.getData());
@@ -104,22 +110,39 @@ public class DadoServiceImpl extends AbstractService implements DadoService {
 		
 		List<DadoDTO> dados = new ArrayList<>();
 		
-		DadoDTO dado =  cargaTensaoToDto(this.cargaTensaoRepository.findActual(id));
-		dados.add(dado);
+		CargaTensao cargaTensao = this.cargaTensaoRepository.findActual(id);
+		DadoDTO dado =  cargaTensaoToDto(cargaTensao);
+		if(dado != null) {
+			dado.setCoordenadas(pointToDoubleArray((Point) cargaTensao.getGeometry()));
+			dados.add(dado);
 		
-		dado =  vazaoToDto(this.vazaoRepository.findActual(id));
-		dados.add(dado);
+		}
 		
-		dado =  inclinometroToDto(this.inclinometroRepository.findActual(id));
-		dados.add(dado);
+		Vazao vazao = this.vazaoRepository.findActual(id);
+		dado =  vazaoToDto(vazao);
+		if(dado != null) { 
+			dado.setCoordenadas(pointToDoubleArray((Point) vazao.getGeometry()));
+			dados.add(dado);
+			}
+		
+		Inclinometro inclinometro = this.inclinometroRepository.findActual(id);
+		dado =  inclinometroToDto(inclinometro);
+		if(dado != null) {
+			dado.setCoordenadas(pointToDoubleArray((Point) inclinometro.getGeometry()));
+			dados.add(dado);
+		}
 		
 		Piezometro piezometro = this.piezometroRepository.findActual(id);
-		
 		dado =  piezometroToDto(piezometro);
-		dados.add(dado);
+		if(dado != null) {
+			dado.setCoordenadas(pointToDoubleArray((Point) piezometro.getGeometry()));
+			dados.add(dado);
+		}
 		
 		dado =  temperaturaToDto(piezometro);
-		dados.add(dado);
+		if(dado != null) { 
+			dados.add(dado);
+		}
 		
 		return dados;
 	}

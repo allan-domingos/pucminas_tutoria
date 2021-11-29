@@ -3,6 +3,7 @@ package br.com.mineradora.repository.impl;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -36,10 +37,15 @@ public class CargaTensaoRepositoryImpl extends AbstractRepository<CargaTensao> i
 
 	@Override
 	public CargaTensao findActual(final BigInteger id) {
-		Query query = this.em.createQuery("SELECT ct FROM CargaTensao ct JOIN FETCH ct.sensor sr JOIN sr.barragem bm WHERE bm.id = :id ORDER BY ct.dataInclusao DESC");
+		Query query = this.em.createQuery(
+				"SELECT ct FROM CargaTensao ct JOIN FETCH ct.sensor sr JOIN sr.barragem bm WHERE bm.id = :id ORDER BY ct.data DESC");
 		query.setParameter("id", id);
 		query.setMaxResults(1);
-		return (CargaTensao) query.getSingleResult();
+		try {
+			return (CargaTensao) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }
