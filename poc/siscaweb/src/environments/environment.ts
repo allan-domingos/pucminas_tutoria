@@ -9,7 +9,7 @@ export const environment = {
   scope: 'openid',
   responseType: 'code',
   showDebugInformation: true,
-  issuer: 'sgm',
+  issuer: 'siscaweb',
   revocationEndpoint: 'https://allandomingos.ddns.net/oauth2/revoke',
   userinfoEndpoint: 'https://allandomingos.ddns.net/oauth2/userinfo',
   loginUrl: 'https://allandomingos.ddns.net/oauth2/authorize',
