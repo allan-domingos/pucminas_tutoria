@@ -16,6 +16,7 @@ import SimpleGeometry from 'ol/geom/SimpleGeometry';
 import { Dado } from 'src/app/model/dado';
 import Point from 'ol/geom/Point';
 import OverlayPositioning from 'ol/OverlayPositioning';
+import { LiteralMapEntry } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'sgm-map',
@@ -171,7 +172,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   private addControls(): void {
     let fullScrenn = new FullScreen({ source: 'fullscreen' });
-    fullScrenn.addEventListener("click",function(){alert('teste')})
+    //fullScrenn.addEventListener("click",new Listener()})
     this.map.addControl(fullScrenn);
   }
 

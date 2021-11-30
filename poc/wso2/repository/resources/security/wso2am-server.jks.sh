@@ -5,5 +5,3 @@ keytool -genkey -alias wso2am-server -keyalg RSA -keysize 2048 -keystore wso2am-
 keytool -export -alias wso2am-server -keystore wso2am-server-keystore.jks -storetype JKS -file wso2am-server.pem -storepass carbon 
 
 keytool -import -alias wso2am-server -file wso2am-server.pem -keystore wso2am-server-truststore.jks -storetype JKS -storepass carbon -keypass carbon -trustcacerts -noprompt
-
-keytool -import -alias ibge -file ibge.cer -keystore wso2am-server-truststore.jks -storetype JKS -storepass carbon -keypass carbon -trustcacerts -noprompt

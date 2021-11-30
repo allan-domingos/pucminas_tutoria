@@ -4,7 +4,7 @@ export const OAUTH: OAuthModuleConfig = {
     resourceServer: {
         sendAccessToken: true,
         allowedUrls: [
-            'https://bomdestino.gov.br/'
+            'https://allandomingos.ddns.net/'
         ],
     }
 }
