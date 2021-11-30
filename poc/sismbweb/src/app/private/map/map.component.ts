@@ -170,7 +170,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   private addControls(): void {
-    let fullScrenn = new FullScreen({ source: 'fullscreen' })
+    let fullScrenn = new FullScreen({ source: 'fullscreen' });
+    fullScrenn.addEventListener("click",function(){alert('teste')})
     this.map.addControl(fullScrenn);
   }
 
