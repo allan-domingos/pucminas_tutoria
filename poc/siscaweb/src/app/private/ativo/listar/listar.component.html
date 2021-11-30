@@ -16,7 +16,7 @@
                         pTooltip="Novo Ativo" tooltipPosition="top" (click)="cadastrar()"></button>
 
                     <p-table [value]="ativos" [paginator]="true" [rows]="5" dataKey="id" (onRowExpand)="onRowExpand($event)"
-                        styleClass="p-datatable-striped p-datatable-responsive-demo">
+                        styleClass="p-datatable-striped p-datatable-responsive-demo p-datatable-sm">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th scope="col" style="width: 3rem"></th>
@@ -27,7 +27,7 @@
                                 <th scope="col">Ações</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-ativo>
+                        <ng-template pTemplate="body" let-ativo let-expanded="expanded">
                             <tr>
                                 <td>
                                     <button type="button" pButton pRipple [pRowToggler]="ativo"
@@ -46,11 +46,11 @@
                                         class="p-button-rounded p-button-secondary mr-2" pTooltip="Remover Ativo"
                                         tooltipPosition="top" (click)="remover(ativo)"></button>
                                     <button pButton pRipple icon="pi pi-send"
-                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Solicitar Aquisição"
+                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Solicitar Aquisição de Ativo"
                                         tooltipPosition="top" (click)="cadastraSolicitacao(ativo)">
                                     </button>
                                     <button pButton pRipple icon="pi pi-eye"
-                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Ver Solicitações"
+                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Histórico de Solicitações"
                                         tooltipPosition="top" (click)="verSolicitacao(ativo)">
                                     </button>
                                 </td>
@@ -60,7 +60,10 @@
                             <tr>
                                 <td colspan="6">
                                     <p-table [value]="ativo.aquisicoes" dataKey="id" [paginator]="true" [rows]="3"
-                                        styleClass="p-datatable-striped p-datatable-responsive-demo">
+                                        styleClass="p-datatable-striped p-datatable-responsive-demo  p-datatable-sm">
+                                        <ng-template pTemplate="caption">
+                                            Aquisições
+                                        </ng-template>
                                         <ng-template pTemplate="header">
                                             <tr>
                                                 <th scope="col">CNPJ</th>
@@ -79,8 +82,8 @@
                                                 <td>{{aquisicao.valor}}</td>
                                                 <td>{{aquisicao.dataInclusao | date: 'dd/MM/yyyy HH:mm'}}</td>
                                                 <td>
-                                                    <button pButton pRipple icon="pi pi-plus" [routerLink]="['/ativo/patrimonio',aquisicao.id]"
-                                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Cadastra Patrimonio"
+                                                    <button pButton pRipple icon="pi pi-list" [routerLink]="['/ativo/patrimonio',aquisicao.id]"
+                                                        class="p-button-rounded p-button-secondary mr-2" pTooltip="Listar Patrimônios"
                                                         tooltipPosition="top">
                                                     </button>
                                                 </td>
@@ -170,7 +173,10 @@
     [closeOnEscape]="false" [closable]="false">
     <ng-template pTemplate="content">
         <p-table [value]="solicitacoes" [paginator]="true" [rows]="3"
-            styleClass="p-datatable-striped p-datatable-responsive-demo">
+            styleClass="p-datatable-striped p-datatable-responsive-demo p-datatable-sm">
+            <ng-template pTemplate="caption">
+                Histórico de Solicitações
+            </ng-template>
             <ng-template pTemplate="header">
                 <tr>
                     <th scope="col">Nome</th>

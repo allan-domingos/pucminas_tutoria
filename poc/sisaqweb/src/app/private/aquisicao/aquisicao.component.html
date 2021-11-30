@@ -7,7 +7,7 @@
                 </div>
                 <div class="card-body">
                     <p-table [value]="solicitacoes" dataKey="id" [paginator]="true" [rows]="5"
-                        styleClass="p-datatable-striped p-datatable-responsive-demo"
+                        styleClass="p-datatable-striped p-datatable-responsive-demo p-datatable-sm"
                         (onRowExpand)="onRowExpand($event)">
                         <ng-template pTemplate="header">
                             <tr>
@@ -42,7 +42,10 @@
                             <tr>
                                 <td colspan="6">
                                     <p-table [value]="solicitacao.aquisicoes" dataKey="id" [paginator]="true" [rows]="3"
-                                        styleClass="p-datatable-striped p-datatable-responsive-demo">
+                                        styleClass="p-datatable-striped p-datatable-responsive-demo p-datatable-sm">
+                                        <ng-template pTemplate="caption">
+                                            Aquisições
+                                        </ng-template>
                                         <ng-template pTemplate="header">
                                             <tr>
                                                 <th scope="col">CNPJ</th>

@@ -7,7 +7,7 @@
             <div class="card border-dark shadow-lg mt-5">
 
                 <div class="card-header">
-                    <strong> Cadastro Patrimônio </strong>
+                    <strong> Patrimônios </strong>
                 </div>
 
                 <div class="card-body">
@@ -91,7 +91,10 @@
                         pTooltip="Novo Ativo" tooltipPosition="top" (click)="cadastrar()"></button>
 
                     <p-table [value]="patrimonios" [paginator]="true" [rows]="5" dataKey="id"
-                        styleClass="p-datatable-striped p-datatable-responsive-demo">
+                        styleClass="p-datatable-striped p-datatable-responsive-demo p-datatable-sm">
+                        <ng-template pTemplate="caption">
+                            Patrimônios
+                        </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
                                 <th scope="col">Número</th>
@@ -163,7 +166,7 @@
 </form>
 
 <p-dialog [(visible)]="dialogAlocacaoOpen" [style]="{width: '832px'}" (onShow)="initDialogMap()"
-    header="{{alocacao?.id ? 'Editar' : 'Cadastrar'}} Alocacao" [modal]="true" styleClass="p-fluid"
+    header="Alocar Patrimônio" [modal]="true" styleClass="p-fluid"
     [closeOnEscape]="false" [closable]="false">
     <ng-template pTemplate="content">
         <div id="map" style="width: 800px; height: 600px;"></div>

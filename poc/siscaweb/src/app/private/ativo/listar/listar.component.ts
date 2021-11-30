@@ -128,10 +128,11 @@ export class ListarComponent implements OnInit {
       descricao: this.ativo.descricao,
       quantidade: undefined
     });
-    this.dialogSolicitacaoOpen = false;
+    this.dialogSolicitacaoOpen = true;
   }
 
   public onSubmitSolicitacao(): void {
+    this.dialogSolicitacaoOpen = false;
     let solicitacao: Solicitacao = {
       nome: this.formSolicitacao.controls.nome.value,
       descricao: this.formSolicitacao.controls.descricao.value,
