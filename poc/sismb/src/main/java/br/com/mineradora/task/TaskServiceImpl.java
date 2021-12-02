@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +51,7 @@ public class TaskServiceImpl {
 	@Autowired
 	private InclinometroRepository inclinometroRepository;
 
-	//@Scheduled(fixedDelay = 30000, initialDelay = 30000)
+	@Scheduled(fixedDelay = 30000, initialDelay = 30000)
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void executar() {
 		log.info("--- INICIANDO SIMULANÇÃO DE VALORES ---");
